@@ -134,8 +134,31 @@
   height: 3px;
   background-color: black;
   border-radius: 50%;
-    top: 10px;
-    right: 10px;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+.submenu {
+    visibility: hidden;
+    border-radius: 12px;
+    background: #FFF;
+    box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.14);
+}
+.submenu-item_plus, .submenu-item_delete{}
+.submenu-item_plus {
+    background: url("./image/Plus.svg") center center no-repeat;
+}
+.submenu-item_delete {
+background: url("./image/Delete.svg") center center no-repeat;
+}
+.chat-menu:hover .submenu {
+    visibility: visible;
+    position: absolute;
+    right: 20px;
+    padding: 19px 15px 19px 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
 }
 .chat-menu:before, .chat-menu:after {
   content: "";
