@@ -28,6 +28,7 @@ body {
   color: #ffffff;
   border-radius: 8px;
   border: none;
+  cursor: pointer;
 }
 .button:hover {
   background: #1F4CBDFF;

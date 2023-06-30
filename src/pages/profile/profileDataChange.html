@@ -14,14 +14,13 @@
 <main class='profile'>
     <div class='profile__wrapper'>
         <div class='profile__link'>
-            <a href='../chats/chats.html' class='profile__linkToChat'></a>
+            <a href='profile.html' class='profile__linkToChat'></a>
         </div>
         <div class='profile__info'>
             <div class='profile__info-avatar'>
-<!--                <img src="" alt="Аватар">-->
+                <!--                <img src="" alt="Аватар">-->
             </div>
-            <div class="profile__info-name">Иван</div>
-            <div class='form-info'>
+            <form class='form-info'>
                 <div class='form-info__input'>
                     <div class='form-info-title'>Почта</div>
                     <input
@@ -80,23 +79,10 @@
                             value='+7 (909) 967 30 30'
                     />
                 </div>
-
-                <div class="links">
-                    <div class='form-info__input'>
-                        <a href="profileDataChange.html" class='form-info-title-link'>Изменить данные</a>
-                    </div>
-                    <div class='form-info__input'>
-                        <a href="profilePasswordChange.html" class='form-info-title-link'>Изменить данные</a>
-                    </div>
-                    <div class='form-info__input'>
-                        <a href="" class='form-info-title-exit'>Выйти</a>
-                    </div>
-                </div>
-            </div>
-
+                    {{> button name='Сохранить'}}
+            </form>
         </div>
     </div>
-
 </main>
 </body>
 </html>
