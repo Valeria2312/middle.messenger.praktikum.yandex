@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap" rel="stylesheet">
+    <link rel='stylesheet' href='../../style.css'/>
+    <link rel='stylesheet' href='chats.scss'/>
+    <title>Yandex.Messenger</title>
+</head>
+<body>
+<main class='chats'>
+    <section class="list-chats">
+        <div class="link-profile">
+            <a href="#" class="link-profile__link">Профиль</a>
+            <img class="link-profile__img" src="image/Polygon%201.svg" alt="Переход на профиль">
+        </div>
+        <label>
+            <input class="list-chats__search" type="text" placeholder='Поиск'>
+        </label>
+        <div class="list-chats__items">
+            {{> chatsItem }}
+            {{> chatsItem }}
+            {{> chatsItem }}
+        </div>
+    </section>
+    <!--    <section class="chat-message">-->
+    <!--&lt;!&ndash;        <div class="chat-message_text">Выберите чат чтобы отправить сообщение</div>&ndash;&gt;-->
+    <!--    </section>-->
+    <section class="chat-openItem">
+        {{> chat }}
+    </section>
+</main>
+</body>
+</html>

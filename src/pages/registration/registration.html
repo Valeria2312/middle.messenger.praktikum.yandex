@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap" rel="stylesheet">
+    <link rel='stylesheet' href='../../style.css'/>
+    <link rel='stylesheet' href='registration.scss'/>
+    <title>Yandex.Messenger</title>
+</head>
+<body>
+<main class='registration'>
+    <div class='registration__wrapper'>
+        <div class='registration__wrapper-header'>Регистрация</div>
+        <form action='#' class='form-registration'>
+            <div class="form-registration__inputs">
+                {{> input type='email' class='form-registration_input' text='Почта' name='email'}}
+                {{> input type='text' class='form-registration_input' text='Логин' name='login'}}
+                {{> input type='text' class='form-registration_input' text='Имя' name='first_name'}}
+                {{> input type='text' class='form-registration_input' text='Фамилия' name='second_name'}}
+                {{> input type='tel' class='form-registration_input' text='Телефон' name='phone'}}
+                {{> input type='text' class='form-registration_input' text='Пароль' name='password'}}
+                {{> input type='text' class='form-registration_input' text='Пароль (еще раз)' name='password'}}
+            </div>
+            {{> button name='Зарегистрироваться'}}
+            <a href='#' class='form-registration__login'>Войти</a>
+        </form>
+    </div>
+</main>
+</body>
+</html>
