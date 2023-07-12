@@ -1,6 +1,6 @@
 import {resolve} from 'path'
 import { defineConfig } from 'vite';
-import handlebars from 'vite-plugin-handlebars'
+import handlebars from './vite-plugin-handlebars-precompile.js'
 
 export default defineConfig({
     root: resolve(__dirname, 'src'),
@@ -12,10 +12,10 @@ export default defineConfig({
         host: '0.0.0.0',
         hmr: true,
     },
-    plugins: [handlebars({
-        partialDirectory: resolve(__dirname, 'src/partials'),
-        context: {
-            username: 'Anna',
+    plugins: [handlebars()],
+    resolve: {
+        alias: {
+            handlebars: "handlebars/runtime"
         }
-    })],
+    },
 })
