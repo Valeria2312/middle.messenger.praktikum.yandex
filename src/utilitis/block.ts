@@ -1,4 +1,4 @@
-import EventBus from "./EventBus";
+import EventBus from "./eventBus";
 import { v4 as makeID } from 'uuid';
 
 class Block <P extends Record<string, any> = any> {
@@ -13,7 +13,7 @@ class Block <P extends Record<string, any> = any> {
     protected props: P;
     public children: Record<string, Block>;
     private eventBus: () => EventBus;
-    private _element: HTMLElement | null = null;
+     _element: HTMLElement | null = null;
     private readonly _meta: { tagName: string; props: P; };
 
     constructor(tagName = "div", propsChildren = {}) {
@@ -63,7 +63,6 @@ class Block <P extends Record<string, any> = any> {
         this._createResources();
 
         this.init();
-
         this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
     }
 
@@ -106,7 +105,6 @@ class Block <P extends Record<string, any> = any> {
 
     _render() {
         const fragment = this.render();
-        console.log(fragment)
         this._element!.innerHTML = '';
         if(fragment) {
             this._element!.append(fragment);
@@ -117,7 +115,6 @@ class Block <P extends Record<string, any> = any> {
     compile(template: (context:Record<string, any>) => string, context: Record<string, any>) {
 
         const contextAndTags = { ...context };
-        console.log(contextAndTags)
 
         //просматриваем объект дочерних элементов
         Object.entries(this.children).forEach(([name, component]) => {
@@ -151,7 +148,6 @@ class Block <P extends Record<string, any> = any> {
                 replaceTagToComponent(component);
             }
         });
-        console.log(temp.content)
         return temp.content;
     }
 

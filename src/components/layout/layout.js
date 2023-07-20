@@ -5,10 +5,10 @@ const tpl =
     `
 <div>
 <a href="../../pages/login/login.hbs">Страница входа</a>
-    <a href="../../pages/registration/registration.js">Страница регистрации</a>
-<a href="../../pages/error/error.js">Страница ошибки</a>
-<a href="../../pages/chats/chats.js">Страница чата</a>
-<a href="../../pages/profile/profile.js">Страница профиля</a>
+    <a href="../../pages/registration/registration.ts">Страница регистрации</a>
+<a href="../../pages/error/error.ts">Страница ошибки</a>
+<a href="../../pages/chats/chats.ts">Страница чата</a>
+<a href="../../pages/profile/profile.ts">Страница профиля</a>
 </div>
 <main>
 {{{body}}}
