@@ -1,4 +1,4 @@
-import Block from "../../utilitis/block";
+import Block from "../../utilities/block";
 import template from "./inputProfile.hbs";
 
 interface InputProfileProps {
@@ -8,7 +8,7 @@ interface InputProfileProps {
     value?: string;
     readonly?: boolean,
     events?: {
-        onblur?: (event: FocusEvent) => void
+        blur?: (e: any) => void
     }
 }
 
@@ -16,7 +16,6 @@ export class InputProfile extends Block {
     constructor(props: InputProfileProps) {
         super('div',props);
     }
-
     render() {
         return this.compile(template, { ...this.props });
     }

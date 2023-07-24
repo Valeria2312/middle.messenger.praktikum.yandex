@@ -1,3 +1,4 @@
+export {}
 enum METHOD {
     GET = 'GET',
     POST = 'POST',
@@ -24,6 +25,7 @@ function queryStringify(data: Record<string, any>) {
     }, '?');
 }
 
+// @ts-ignore
 class HTTPTransport {
     get: requestMethod = (url, options ) => {
         return this.request(

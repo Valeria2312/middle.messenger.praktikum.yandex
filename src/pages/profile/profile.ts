@@ -1,5 +1,5 @@
 import './profile.scss'
-import Block from "../../utilitis/block";
+import Block from "../../utilities/block";
 import {InputProfile} from "../../partials/inputProfile/inputProfile";
 import template from "./profile.hbs";
 import {Form} from "../../partials/form/form";
@@ -12,9 +12,6 @@ export class ProfilePage extends Block {
     init() {
         this.children.form = new Form({
             formClass:'form-info',
-            // events: {
-            //     submit: (event) => handleSubmit(),
-            // },
             children: [
                 new InputProfile({
                     title: "Почта",
@@ -64,17 +61,17 @@ export class ProfilePage extends Block {
                 }),
                 new Link({
                     href: "/profileData",
-                    class: "form-info-title-link",
+                    classLink: "form-info-title-link",
                     title: "Изменить данные",
                 }),
                 new Link({
                     href: "/profilePassword",
-                    class: "form-info-title-link",
+                    classLink: "form-info-title-link",
                     title: "Изменить пароль",
                 }),
                 new Link({
                     href: "/login",
-                    class: "form-info-title-exit",
+                    classLink: "form-info-title-exit",
                     title: "Выйти",
                 }),
             ],

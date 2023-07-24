@@ -1,4 +1,4 @@
-import Block from "../../utilitis/block";
+import Block from "../../utilities/block";
 import template from "./chatsItem.hbs";
 
 interface ChatItemProps {

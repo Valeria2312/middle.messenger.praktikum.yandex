@@ -1,4 +1,4 @@
-import Block from "../../utilitis/block";
+import Block from "../../utilities/block";
 import template from "./form.hbs";
 
 interface FormProps {
@@ -15,6 +15,15 @@ export class Form extends Block {
     }
     init() {
         this.children.children = this.props.children;
+    }
+    addEvents() {
+        const child = this._element?.querySelector('form');
+        if(!child) {
+            return
+        }
+        const { events = {} } = this.props;
+        for (let i in events)
+            child.addEventListener(i, events[i])
     }
     render() {
         return this.compile(template, { ...this.props });

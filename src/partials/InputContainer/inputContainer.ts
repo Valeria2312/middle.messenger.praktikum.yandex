@@ -1,18 +1,31 @@
-import Block from "../../utilitis/block";
+import Block from "../../utilities/block";
 import template from "./inputContainer.hbs";
 
 interface InputProps {
     class?: string;
     text?: string;
-    children: Block[];
+    name?: string;
+    type?: string;
+    value?: string;
+    events?: {
+        blur?: (e: any) => void
+    }
 }
 
 export class InputContainer extends Block {
     constructor(props: InputProps) {
         super('div',props);
     }
-    init() {
-        this.children.children = this.props.children;
+    addEvents() {
+        const child = this._element?.querySelector('.form-input')?.querySelector('input');
+
+        if(!child) {
+            return
+        }
+        const { events = {} } = this.props;
+
+        for (let i in events)
+            child.addEventListener(i, events[i])
     }
     render() {
         return this.compile(template, { ...this.props });

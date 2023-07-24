@@ -1,10 +1,11 @@
-import Block from "../../utilitis/block";
+import Block from "../../utilities/block";
 import template from "./link.hbs";
 
 interface LinkProps {
     title?: string;
     href?: string;
-    class?: string;
+    classLink?: string;
+    classDiv?: string;
 }
 
 export class Link extends Block {

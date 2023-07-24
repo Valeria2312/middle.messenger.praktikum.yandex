@@ -1,8 +1,9 @@
-import Block from "../../utilitis/block";
+import Block from "../../utilities/block";
 import template from "./MessageTo.hbs";
 
 interface messageToProps {
-
+    text: string,
+    time: string,
 }
 
 export class messageTo extends Block {

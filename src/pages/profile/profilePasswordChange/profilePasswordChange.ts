@@ -1,9 +1,9 @@
-import Block from "../../../utilitis/block";
-import {InputProfile} from "../../../partials/inputProfile/inputProfile";
+import Block from "../../../utilities/block";
 import template from "./profilePasswordChange.hbs";
 import {Form} from "../../../partials/form/form";
 import {Button} from "../../../partials/button/button";
-// import {Link} from "../../partials/link/link";
+import { InputContainer } from '../../../partials/InputContainer/inputContainer';
+import { handleFormSubmit, validationCheck } from '../../../utilities/validation';
 
 export class ProfilePasswordChangePage extends Block {
     constructor() {
@@ -11,31 +11,43 @@ export class ProfilePasswordChangePage extends Block {
     }
     init() {
         this.children.form = new Form({
-            formClass:'form-info',
-            // events: {
-            //     submit: (event) => handleSubmit(),
-            // },
+            formClass:'form-passwordChange',
+            events: {
+                submit: (e) => { handleFormSubmit(e) },
+            },
             children: [
-                new InputProfile({
-                    title: "Старый пароль",
+                new InputContainer({
+                    text: "Старый пароль",
+                    class:'form-input',
                     name: "oldPassword",
                     type: "password",
                     value: '•••••••••',
+                    events: {
+                        blur: (e: any) => { validationCheck(e) }
+                    },
                     // readonly: true,
                 }),
-                new InputProfile({
-                    title: "Новый пароль",
+                new InputContainer({
+                    text: "Новый пароль",
+                    class:'form-input',
                     name: "newPassword",
                     type: "password",
                     value: '•••••••••',
+                    events: {
+                        blur: (e: any) => { validationCheck(e) }
+                    },
                     // readonly: true,
                 }),
 
-                new InputProfile({
-                    title: "Повторите новый пароль",
-                    name: "repeat_password",
+                new InputContainer({
+                    text: "Повторите новый пароль",
+                    class:'form-input',
+                    name: "repeatPassword",
                     type: "password",
                     value: '•••••••••',
+                    events: {
+                        blur: (e: any) => { validationCheck(e) }
+                    },
                     // readonly: true,
                 }),
 

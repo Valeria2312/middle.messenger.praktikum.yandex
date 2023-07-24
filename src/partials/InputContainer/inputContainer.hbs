@@ -1,7 +1,12 @@
-<div class={{class}}>
+<div class='{{class}}'>
     <label for='input' class='form-title'>{{text}}</label>
-    {{#each children }}
-        {{{ this }}}
-    {{/each}}
+    <input
+            id='input'
+            type='{{type}}'
+            name='{{name}}'
+            class='input'
+            placeholder="{{placeholder}}"
+            value="{{value}}"
+    />
     <div class='error'></div>
 </div>

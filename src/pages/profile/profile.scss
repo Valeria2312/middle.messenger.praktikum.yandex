@@ -53,7 +53,7 @@
 
 }
 
-.form-info {
+.form-dataChange {
   width: 510px;
   margin-top: 60px;
 
@@ -62,8 +62,10 @@
     height: 40px;
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    //align-items: center;
     border-bottom: 1px solid #eaeaea;
+
+    flex-direction: column;
   }
 
   &__input:last-child {
@@ -89,6 +91,8 @@
 
   &__box {
     border: none;
+    background: none;
+    outline: none;
     color: #999;
     text-align: right;
     font-size: 13px;
@@ -100,4 +104,7 @@
     margin-top: 60px;
   }
 }
-
+.form-passwordChange {
+  width: 510px;
+  margin-top: 60px;
+}

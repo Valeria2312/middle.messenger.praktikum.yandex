@@ -18,25 +18,20 @@
       color: #1e1e1e;
       margin-bottom: 40px;
     }
-
-    & .form-registration {
-      &_input {
+    & .form-input{
         margin-bottom: 16px;
       }
-
-      &_input:last-child {
+      &.form-input:last-child {
         margin-bottom: 0;
-      }
-
-      &__login {
-        margin-top: 14px;
-        display: block;
-        font-weight: 500;
-        font-size: 11px;
-        text-align: center;
-        color: #3369F3;
-        text-decoration: none;
       }
     }
   }
+.form-registration__loginLink {
+  margin-top: 14px;
+      display: block;
+      font-weight: 500;
+      font-size: 11px;
+      text-align: center;
+      color: #3369F3;
+      text-decoration: none;
 }

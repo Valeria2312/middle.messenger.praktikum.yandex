@@ -1,6 +1,6 @@
 import './error.scss'
 import template from "./error.hbs";
-import Block from '../../utilitis/block';
+import Block from '../../utilities/block';
 import {Error} from "../../partials/error/error";
 
 export class ErrorPage extends Block {

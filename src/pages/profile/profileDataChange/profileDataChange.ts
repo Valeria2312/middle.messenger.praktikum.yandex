@@ -1,8 +1,9 @@
-import Block from "../../../utilitis/block";
+import Block from "../../../utilities/block";
 import {Form} from "../../../partials/form/form";
-import {InputProfile} from "../../../partials/inputProfile/inputProfile";
 import template from "./profileDataChange.hbs";
 import {Button} from "../../../partials/button/button";
+import { handleFormSubmit, validationCheck } from '../../../utilities/validation';
+import { InputContainer } from '../../../partials/InputContainer/inputContainer';
 
 
 export class ProfileDataChangePage extends Block {
@@ -10,57 +11,76 @@ export class ProfileDataChangePage extends Block {
         super();
     }
     init() {
+        super.init()
         this.children.form = new Form({
-            formClass:'form-info',
-            // events: {
-            //     submit: (event) => handleSubmit(),
-            // },
+            formClass:'form-dataChange',
+            events: {
+                submit: (e) => { handleFormSubmit(e) },
+            },
             children: [
-                new InputProfile({
-                    title: "Почта",
+                new InputContainer({
+                    class:'form-input form-info__box' ,
+                    text: "Почта",
                     name: "email",
                     type: "email",
                     value: "pochta@yandex.ru",
-                    readonly: true,
+                    events: {
+                        blur: (e: any) => { validationCheck(e) }
+                    },
                 }),
-                new InputProfile({
-                    title: "Логин",
+                new InputContainer({
+                    class:'form-input',
+                    text: "Логин",
                     name: "login",
                     type: "text",
                     value: "ivanivanov",
-                    readonly: true,
+                    events: {
+                        blur: (e: any) => { validationCheck(e) }
+                    },
                 }),
 
-                new InputProfile({
-                    title: "Имя",
+                new InputContainer({
+                    class:'form-input',
+                    text: "Имя",
                     name: "first_name",
                     type: "text",
                     value: "Илья",
-                    readonly: true,
+                    events: {
+                        blur: (e: any) => { validationCheck(e) }
+                    },
                 }),
 
-                new InputProfile({
-                    title: "Фамилия",
+                new InputContainer({
+                    class:'form-input',
+                    text: "Фамилия",
                     name: "second_name",
                     type: "text",
                     value: "Иванов",
-                    readonly: true,
+                    events: {
+                        blur: (e: any) => { validationCheck(e) }
+                    },
                 }),
 
-                new InputProfile({
-                    title: "Имя в чате",
+                new InputContainer({
+                    class:'form-input',
+                    text: "Имя в чате",
                     name: "chat_name",
                     type: "text",
                     value: "Илья",
-                    readonly: true,
+                    events: {
+                        blur: (e: any) => { validationCheck(e) }
+                    },
                 }),
 
-                new InputProfile({
-                    title: "Телефон",
+                new InputContainer({
+                    class:'form-input',
+                    text: "Телефон",
                     name: "phone",
                     type: "text",
                     value: "8(985)952-14-00",
-                    readonly: true,
+                    events: {
+                        blur: (e: any) => { validationCheck(e) }
+                    },
                 }),
                 new Button({
                     name:'Сохранить',

@@ -1,6 +1,6 @@
 import './chats.scss';
 import template from "./chats.hbs";
-import Block from '../../utilitis/block';
+import Block from '../../utilities/block';
 import {ChatItem} from "../../partials/chatItem/chatItem";
 import {Chat} from "../../partials/chat/chat";
 

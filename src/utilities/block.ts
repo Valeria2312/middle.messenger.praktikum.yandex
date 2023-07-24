@@ -75,6 +75,12 @@ class Block <P extends Record<string, any> = any> {
     componentDidMount(): boolean {
         return true;
     }
+    addEvents() {
+        const {events = {}} = this.props;
+        Object.keys(events).forEach((eventName) => {
+            this._element?.addEventListener(eventName, events[eventName])
+        });
+    }
 
     public dispatchComponentDidMount(){
         this.eventBus().emit(Block.EVENTS.FLOW_CDM);
@@ -108,6 +114,7 @@ class Block <P extends Record<string, any> = any> {
         this._element!.innerHTML = '';
         if(fragment) {
             this._element!.append(fragment);
+            this.addEvents();
         }
     }
 

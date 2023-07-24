@@ -1,5 +1,5 @@
 <div class='form-info__input'>
-    <div class='form-info-title'>{{title}}</div>
+    <label class='form-info-title'>{{title}}</label>
     <input
             name={{name}}
             type={{type}}
@@ -7,7 +7,8 @@
             value={{value}}
         {{#if readonly}}
             readonly
+            disabled
         {{/if}}
     />
-</div>
+    <div class='error'></div>
 </div>

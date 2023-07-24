@@ -9,7 +9,7 @@ body {
     height: 100%;
 }
 div {
-    all: initial;
+    /*all: initial;*/
 }
 #app, #app > div {
     all: initial;
@@ -19,7 +19,7 @@ div {
     color: #999999;
 }
 
-.form-input {
+.input {
     width: 100%;
     border: none;
     border-bottom: 1px solid #3369f3;
@@ -49,5 +49,11 @@ button {
 }
 
 .error {
+    margin-top: 12px;
     display: none;
+    color: #FF2F2F;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 11px;
 }
