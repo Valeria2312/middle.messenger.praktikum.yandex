@@ -1,4 +1,4 @@
-import './profile.scss'
+import './profile.scss';
 import Block from "../../utilities/block";
 import {InputProfile} from "../../partials/inputProfile/inputProfile";
 import template from "./profile.hbs";
@@ -78,6 +78,6 @@ export class ProfilePage extends Block {
         });
     }
     render() {
-        return this.compile(template, { ...this.props });
+        return this.compile(template, this.props);
     }
 }

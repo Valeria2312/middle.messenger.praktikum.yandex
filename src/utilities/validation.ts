@@ -42,11 +42,11 @@ const validDataInputs: Record<string, validInput> = {
         RegExp: /^$/,
         errorMessage:'Сообщение не может быть пустым',
     },
-}
+};
 
 export const validationCheck = (elementEvent: Event) => {
     const input = elementEvent.target as HTMLInputElement;
-    checkValid(input)
+    checkValid(input);
 };
 
 export const handleFormSubmit = (elementEvent: Event) => {
@@ -56,7 +56,7 @@ export const handleFormSubmit = (elementEvent: Event) => {
 
     formInputs.forEach((formInput: HTMLInputElement) => {
         const input = formInput.querySelector('input') as HTMLInputElement;
-        checkValid(input,data)
+        checkValid(input,data);
     });
     collectData(data, formInputs);
 };
@@ -68,7 +68,7 @@ function checkValid(input: HTMLInputElement, data?: Record<string, string>) {
 
     if (!isValid) {
         error!.textContent = nameInput.errorMessage;
-        error!.style.display = 'block'
+        error!.style.display = 'block';
     } else {
         error!.textContent = "";
         if (data) {

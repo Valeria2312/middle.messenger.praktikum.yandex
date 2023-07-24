@@ -14,7 +14,7 @@ export class Chat extends Block {
         super('div',props);
     }
     init() {
-        super.init()
+        super.init();
         this.children.messageFrom1 = new messageFrom({
             text: "Привет! Смотри, тут всплыл интересный кусок лунной\n" +
               "                            космической истории — НАСА в какой-то момент попросила Хассельблад адаптировать модель SWC\n" +
@@ -26,35 +26,35 @@ export class Chat extends Block {
               "                            никогда и не попали. Всего их было произведено 25 штук, одну из них недавно продали на\n" +
               "                            аукционе за 45000 евро.",
             time: "9:01"
-        })
+        });
         this.children.messageFrom2 = new messageFrom({
             text: "Окончательная визуализация должна быть готова до конца\n" +
               "        четвёртого спринта, то есть именно тогда проект должен выглядеть как ваш прототип.",
             time: "9:03"
-        })
+        });
         this.children.messageTo1 = new messageTo({
             text: "Круто!",
             time: "9:03"
-        })
+        });
         this.children.messageTo2 = new messageTo({
             text: "Выбор за вами.",
             time: "9:05"
-        })
+        });
         this.children.messageTo3 = new messageTo({
             text: "Если ваш дизайн предполагает наличие модульных окон, которые\n" +
               "                            в этом спринте никак не используются, делать их сейчас необязательно.",
             time: "9:10"
-        })
+        });
         this.children.inputMessage = new InputContainer({
             class:'form-input inputMessage',
             name: "message",
             type:'text',
             events: {
-                blur: (e: any) => { validationCheck(e) }
+                blur: (e: FocusEvent) => { validationCheck(e); }
             },
-        })
+        });
     }
     render() {
-        return this.compile(template, { ...this.props });
+        return this.compile(template, this.props);
     }
 }

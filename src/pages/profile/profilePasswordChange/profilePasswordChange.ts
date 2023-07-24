@@ -13,7 +13,7 @@ export class ProfilePasswordChangePage extends Block {
         this.children.form = new Form({
             formClass:'form-passwordChange',
             events: {
-                submit: (e) => { handleFormSubmit(e) },
+                submit: (e) => { handleFormSubmit(e); },
             },
             children: [
                 new InputContainer({
@@ -23,7 +23,7 @@ export class ProfilePasswordChangePage extends Block {
                     type: "password",
                     value: '•••••••••',
                     events: {
-                        blur: (e: any) => { validationCheck(e) }
+                        blur: (e: FocusEvent) => { validationCheck(e); }
                     },
                     // readonly: true,
                 }),
@@ -34,7 +34,7 @@ export class ProfilePasswordChangePage extends Block {
                     type: "password",
                     value: '•••••••••',
                     events: {
-                        blur: (e: any) => { validationCheck(e) }
+                        blur: (e: FocusEvent) => { validationCheck(e); }
                     },
                     // readonly: true,
                 }),
@@ -46,7 +46,7 @@ export class ProfilePasswordChangePage extends Block {
                     type: "password",
                     value: '•••••••••',
                     events: {
-                        blur: (e: any) => { validationCheck(e) }
+                        blur: (e: FocusEvent) => { validationCheck(e); }
                     },
                     // readonly: true,
                 }),
@@ -58,6 +58,6 @@ export class ProfilePasswordChangePage extends Block {
         });
     }
     render() {
-        return this.compile(template, { ...this.props });
+        return this.compile(template, this.props);
     }
 }

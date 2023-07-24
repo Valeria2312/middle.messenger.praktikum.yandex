@@ -19,13 +19,13 @@ export class Form extends Block {
     addEvents() {
         const child = this._element?.querySelector('form');
         if(!child) {
-            return
+            return;
         }
         const { events = {} } = this.props;
-        for (let i in events)
-            child.addEventListener(i, events[i])
+        for (const i in events)
+            child.addEventListener(i, events[i]);
     }
     render() {
-        return this.compile(template, { ...this.props });
+        return this.compile(template, this.props);
     }
 }

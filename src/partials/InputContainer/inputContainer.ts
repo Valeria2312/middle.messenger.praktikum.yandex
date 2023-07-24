@@ -8,7 +8,7 @@ interface InputProps {
     type?: string;
     value?: string;
     events?: {
-        blur?: (e: any) => void
+        blur?: (e: FocusEvent) => void
     }
 }
 
@@ -20,14 +20,16 @@ export class InputContainer extends Block {
         const child = this._element?.querySelector('.form-input')?.querySelector('input');
 
         if(!child) {
-            return
+            return;
         }
         const { events = {} } = this.props;
 
-        for (let i in events)
-            child.addEventListener(i, events[i])
+        for (const i in events)
+        {
+            child.addEventListener(i, events[i]);
+        }
     }
     render() {
-        return this.compile(template, { ...this.props });
+        return this.compile(template, this.props);
     }
 }

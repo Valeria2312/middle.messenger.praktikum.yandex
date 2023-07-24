@@ -11,11 +11,11 @@ export class ProfileDataChangePage extends Block {
         super();
     }
     init() {
-        super.init()
+        super.init();
         this.children.form = new Form({
             formClass:'form-dataChange',
             events: {
-                submit: (e) => { handleFormSubmit(e) },
+                submit: (e) => { handleFormSubmit(e); },
             },
             children: [
                 new InputContainer({
@@ -25,7 +25,7 @@ export class ProfileDataChangePage extends Block {
                     type: "email",
                     value: "pochta@yandex.ru",
                     events: {
-                        blur: (e: any) => { validationCheck(e) }
+                        blur: (e: FocusEvent) => { validationCheck(e); }
                     },
                 }),
                 new InputContainer({
@@ -35,7 +35,7 @@ export class ProfileDataChangePage extends Block {
                     type: "text",
                     value: "ivanivanov",
                     events: {
-                        blur: (e: any) => { validationCheck(e) }
+                        blur: (e: FocusEvent) => { validationCheck(e); }
                     },
                 }),
 
@@ -46,7 +46,7 @@ export class ProfileDataChangePage extends Block {
                     type: "text",
                     value: "Илья",
                     events: {
-                        blur: (e: any) => { validationCheck(e) }
+                        blur: (e: FocusEvent) => { validationCheck(e); }
                     },
                 }),
 
@@ -57,7 +57,7 @@ export class ProfileDataChangePage extends Block {
                     type: "text",
                     value: "Иванов",
                     events: {
-                        blur: (e: any) => { validationCheck(e) }
+                        blur: (e: FocusEvent) => { validationCheck(e); }
                     },
                 }),
 
@@ -68,7 +68,7 @@ export class ProfileDataChangePage extends Block {
                     type: "text",
                     value: "Илья",
                     events: {
-                        blur: (e: any) => { validationCheck(e) }
+                        blur: (e: FocusEvent) => { validationCheck(e); }
                     },
                 }),
 
@@ -79,7 +79,7 @@ export class ProfileDataChangePage extends Block {
                     type: "text",
                     value: "8(985)952-14-00",
                     events: {
-                        blur: (e: any) => { validationCheck(e) }
+                        blur: (e: FocusEvent) => { validationCheck(e); }
                     },
                 }),
                 new Button({
@@ -89,6 +89,6 @@ export class ProfileDataChangePage extends Block {
         });
     }
     render() {
-        return this.compile(template, { ...this.props });
+        return this.compile(template, this.props);
     }
 }

@@ -1,4 +1,4 @@
-import './error.scss'
+import './error.scss';
 import template from "./error.hbs";
 import Block from '../../utilities/block';
 import {Error} from "../../partials/error/error";
@@ -18,6 +18,6 @@ export class ErrorPage extends Block {
         });
     }
     render() {
-        return this.compile(template, this.props );
+        return this.compile(template, this.props);
     }
 }

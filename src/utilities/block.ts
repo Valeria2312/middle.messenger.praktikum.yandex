@@ -1,27 +1,32 @@
-import EventBus from "./eventBus";
 import { v4 as makeID } from 'uuid';
+import EventBus from './eventBus';
 
-class Block <P extends Record<string, any> = any> {
+class Block <P extends Record<string, never> = never> {
     static EVENTS = {
-        INIT: "init",
-        FLOW_CDM: "flow:component-did-mount",
-        FLOW_CDU: "flow:component-did-update",
-        FLOW_RENDER: "flow:render",
+        INIT: 'init',
+        FLOW_CDM: 'flow:component-did-mount',
+        FLOW_CDU: 'flow:component-did-update',
+        FLOW_RENDER: 'flow:render',
     } as const;
 
     public id = makeID();
+
     protected props: P;
+
     public children: Record<string, Block>;
+
     private eventBus: () => EventBus;
-     _element: HTMLElement | null = null;
+
+    _element: HTMLElement | null = null;
+
     private readonly _meta: { tagName: string; props: P; };
 
-    constructor(tagName = "div", propsChildren = {}) {
+    constructor(tagName = 'div', propsChildren = {}) {
         const eventBus = new EventBus();
         const { props, children } = this._getChildren(propsChildren as P);
         this._meta = {
             tagName,
-            props: props
+            props,
         };
         this.children = children;
         this.props = this._makePropsProxy(props);
@@ -31,11 +36,11 @@ class Block <P extends Record<string, any> = any> {
         eventBus.emit(Block.EVENTS.INIT);
     }
 
-    //получение дочерних компонентов
+    // получение дочерних компонентов
     _getChildren(childrenAndProps: P): { props: P, children: Record<string, Block>} {
         const props: Record<string, unknown> = {};
         const children: Record<string, Block> = {};
-        if(childrenAndProps) {
+        if (childrenAndProps) {
             Object.entries(childrenAndProps).forEach(([key, value]) => {
                 if (value instanceof Block) {
                     children[key] = value;
@@ -75,17 +80,18 @@ class Block <P extends Record<string, any> = any> {
     componentDidMount(): boolean {
         return true;
     }
+
     addEvents() {
-        const {events = {}} = this.props;
+        const { events = {} } = this.props;
         Object.keys(events).forEach((eventName) => {
-            this._element?.addEventListener(eventName, events[eventName])
+            this._element?.addEventListener(eventName, events[eventName]);
         });
     }
 
-    public dispatchComponentDidMount(){
+    public dispatchComponentDidMount() {
         this.eventBus().emit(Block.EVENTS.FLOW_CDM);
 
-        Object.values(this.children).forEach(child => child.dispatchComponentDidMount());
+        Object.values(this.children).forEach((child) => child.dispatchComponentDidMount());
     }
 
     _componentDidUpdate() {
@@ -112,18 +118,17 @@ class Block <P extends Record<string, any> = any> {
     _render() {
         const fragment = this.render();
         this._element!.innerHTML = '';
-        if(fragment) {
+        if (fragment) {
             this._element!.append(fragment);
             this.addEvents();
         }
     }
 
-    //функция компиляции
-    compile(template: (context:Record<string, any>) => string, context: Record<string, any>) {
-
+    // функция компиляции
+    compile(template: (context:Record<string, string[] | string>) => string, context: any) {
         const contextAndTags = { ...context };
 
-        //просматриваем объект дочерних элементов
+        // просматриваем объект дочерних элементов
         Object.entries(this.children).forEach(([name, component]) => {
             if (Array.isArray(component)) {
                 contextAndTags[name] = component.map((componentItem) => `<div data-id="${componentItem.id}"></div>`);
@@ -131,7 +136,7 @@ class Block <P extends Record<string, any> = any> {
                 contextAndTags[name] = `<div data-id="${component.id}"></div>`;
             }
         });
-        //передача контекста в template
+        // передача контекста в template
         const html = template(contextAndTags);
         const temp = document.createElement('template');
         temp.innerHTML = html;
@@ -144,7 +149,7 @@ class Block <P extends Record<string, any> = any> {
             }
 
             component.getContent()?.append(...Array.from(tag.childNodes));
-            //заменяем комопнент
+            // заменяем комопнент
             tag.replaceWith(component.getContent()!);
         };
 
@@ -165,39 +170,40 @@ class Block <P extends Record<string, any> = any> {
     getContent() {
         return this.element;
     }
-    //проверяем на доступ, функция из урока
+
+    // проверяем на доступ, функция из урока
     _makePropsProxy(props: P) {
-        // Ещё один способ передачи this, но он больше не применяется с приходом ES6+
-        //взято из материалов урока
+    // Ещё один способ передачи this, но он больше не применяется с приходом ES6+
+    // взято из материалов урока
         const self = this;
         return new Proxy(props, {
             get(target, prop: string) {
                 const value = target[prop];
-                return typeof value === "function" ? value.bind(target) : value;
+                return typeof value === 'function' ? value.bind(target) : value;
             },
             set(target, prop: string, value) {
-                const oldTarget = { ...target }
+                const oldTarget = { ...target };
                 target[prop as keyof P] = value;
                 self.eventBus().emit(Block.EVENTS.FLOW_CDU, oldTarget, target);
                 return true;
             },
             deleteProperty() {
                 throw new Error('Отказано в доступе');
-            }
+            },
         });
     }
 
     _createDocumentElement(tagName: string) {
-        // Можно сделать метод, который через фрагменты в цикле создаёт сразу несколько блоков
+    // Можно сделать метод, который через фрагменты в цикле создаёт сразу несколько блоков
         return document.createElement(tagName);
     }
 
     show() {
-        this.getContent()!.style.display = "block";
+        this.getContent()!.style.display = 'block';
     }
 
     hide() {
-        this.getContent()!.style.display = "none";
+        this.getContent()!.style.display = 'none';
     }
 }
 

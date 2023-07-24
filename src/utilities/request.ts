@@ -1,4 +1,4 @@
-export {}
+export {};
 enum METHOD {
     GET = 'GET',
     POST = 'POST',
@@ -9,13 +9,13 @@ enum METHOD {
 
 type Options = {
     method: METHOD;
-    data?: string | any;
+    data?: string;
     timeout?: number;
     headers?: { [header: string]: string };
 };
 type requestMethod = (url: string, options: Options) => Promise<XMLHttpRequest>;
 
-function queryStringify(data: Record<string, any>) {
+function queryStringify(data: string) {
     if (typeof data !== 'object') {
         throw new Error('Data must be object');
     }
@@ -25,9 +25,8 @@ function queryStringify(data: Record<string, any>) {
     }, '?');
 }
 
-// @ts-ignore
 class HTTPTransport {
-    get: requestMethod = (url, options ) => {
+    get: requestMethod = (url, options) => {
         return this.request(
             url,
             { ...options, method: METHOD.GET },

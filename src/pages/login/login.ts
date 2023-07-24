@@ -13,11 +13,11 @@ export class LoginPage extends Block {
         super();
     }
     init() {
-        super.init()
+        super.init();
         this.children.form = new Form({
             formClass: 'form-login',
             events: {
-                submit: (e) => { handleFormSubmit(e) },
+                submit: (e) => { handleFormSubmit(e); },
             },
             children: [
                 new InputContainer({
@@ -27,7 +27,7 @@ export class LoginPage extends Block {
                     type:'text',
                     value: 'ivanivanov',
                     events: {
-                        blur: (e: any) => { validationCheck(e) }
+                        blur: (e: FocusEvent) => { validationCheck(e); }
                     },
                 }),
                 new InputContainer({
@@ -37,7 +37,7 @@ export class LoginPage extends Block {
                     name:'password',
                     value: 'ased123',
                     events: {
-                        blur: (e: any) => { validationCheck(e) }
+                        blur: (e: FocusEvent) => { validationCheck(e);}
                     },
                 }),
                 new Button({
@@ -49,7 +49,7 @@ export class LoginPage extends Block {
                     classLink: 'form-login__backlink',
                 }),
             ]
-        })
+        });
     }
     render() {
         return this.compile(template, this.props);
