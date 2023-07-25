@@ -8,9 +8,7 @@ body {
     padding: 0;
     height: 100%;
 }
-div {
-    /*all: initial;*/
-}
+
 #app, #app > div {
     all: initial;
 }
@@ -28,11 +26,13 @@ div {
     font-size: 13px;
     outline: none;
 }
+
 button {
     background: none;
     color: inherit;
     border: none;
 }
+
 .button {
     margin-top: 42px;
     width: 100%;

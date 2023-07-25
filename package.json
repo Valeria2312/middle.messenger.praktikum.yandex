@@ -15,12 +15,15 @@
     "eslint-config-airbnb": "^19.0.4",
     "express": "^4.18.2",
     "sass": "^1.63.6",
+    "stylelint": "^15.10.2",
     "vite": "^4.3.9"
   },
   "dependencies": {
     "@typescript-eslint/eslint-plugin": "^6.2.0",
     "@typescript-eslint/parser": "^6.2.0",
     "handlebars": "^4.7.7",
+    "stylelint-config-recommended-scss": "^12.0.0",
+    "stylelint-scss": "^5.0.1",
     "uuid": "^9.0.0",
     "vite-plugin-handlebars": "^1.6.0"
   },

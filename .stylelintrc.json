@@ -1,0 +1,23 @@
+{
+  "extends": "stylelint-config-recommended-scss",
+  "plugins": [
+    "stylelint-scss"
+  ],
+  "rules": {
+    "color-hex-case": "lower",
+    "no-empty-source": true,
+    "block-no-empty": true,
+    "no-duplicate-selectors": true,
+    "declaration-empty-line-before": "never",
+    "shorthand-property-no-redundant-values": true,
+    "length-zero-no-unit": true
+  },
+  "ignoreFiles": [
+    "/dist"
+  ],
+  "overrides": [
+    {
+      "files": ["**/*.css","**/*.scss"]
+    }
+  ]
+}
