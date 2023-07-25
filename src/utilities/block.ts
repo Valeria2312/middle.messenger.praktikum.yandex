@@ -82,9 +82,15 @@ class Block <P extends Record<string, never> = never> {
     }
 
     addEvents() {
-        const { events = {} } = this.props;
+        const { events = {} } = this.props as { events?: Record<string, () => void> };
         Object.keys(events).forEach((eventName) => {
             this._element?.addEventListener(eventName, events[eventName]);
+        });
+    }
+    _removeEvents() {
+        const { events = {} } = this.props as { events?: Record<string, () => void> };
+        Object.keys(events).forEach((eventName) => {
+            this._element?.removeEventListener(eventName, events[eventName]);
         });
     }
 
@@ -117,6 +123,7 @@ class Block <P extends Record<string, never> = never> {
 
     _render() {
         const fragment = this.render();
+        this._removeEvents();
         this._element!.innerHTML = '';
         if (fragment) {
             this._element!.append(fragment);
