@@ -20,14 +20,12 @@
     width: 28px;
     height: 28px;
     background: url("./image/back.png") center center no-repeat;
-
   }
 
   &__info {
     position: relative;
     width: 100%;
     display: flex;
-    //justify-content: center;
     flex-direction: column;
     align-items: center;
     padding: 60px 0 100px 0;
@@ -53,7 +51,7 @@
 
 }
 
-.form-info {
+.form-dataChange {
   width: 510px;
   margin-top: 60px;
 
@@ -62,8 +60,9 @@
     height: 40px;
     display: flex;
     justify-content: space-between;
-    align-items: center;
     border-bottom: 1px solid #eaeaea;
+
+    flex-direction: column;
   }
 
   &__input:last-child {
@@ -78,15 +77,19 @@
 
     &-link {
       color: #3369F3;
+      text-decoration: none;
     }
 
     &-exit {
       color: #F00;
+      text-decoration: none;
     }
   }
 
   &__box {
     border: none;
+    background: none;
+    outline: none;
     color: #999;
     text-align: right;
     font-size: 13px;
@@ -99,3 +102,7 @@
   }
 }
 
+.form-passwordChange {
+  width: 510px;
+  margin-top: 60px;
+}

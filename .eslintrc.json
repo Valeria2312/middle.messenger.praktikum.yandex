@@ -1,0 +1,35 @@
+{
+  "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended"],
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true
+  },
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint", "import"],
+  "rules": {
+    "@typescript-eslint/no-unused-vars": 2,
+    "max-len": [2, 150],
+    "linebreak-style": 0,
+    "global-require": 0,
+    "eslint linebreak-style": [0, "error", "windows"],
+    "no-var": "error",
+    "semi": "error",
+    "indent": "error",
+    "no-multi-spaces": "error",
+    "space-in-parens": "error",
+    "prefer-const": "error",
+    "@typescript-eslint/no-this-alias": "off",
+    "import/no-unresolved": [
+      2,
+      { "caseSensitive": false }
+    ]
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".ts"]
+      }
+    }
+  }
+}

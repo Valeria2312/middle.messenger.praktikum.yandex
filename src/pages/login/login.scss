@@ -22,8 +22,11 @@
 }
 
 .form-login {
-  &__login {
-    margin-bottom: 16px;
+  &__inputs {
+    display: flex;
+    flex-direction: column;
+    padding-top: 16px;
+    gap: 16px;
   }
 
   &__backlink {
@@ -36,4 +39,3 @@
     text-decoration: none;
   }
 }
-

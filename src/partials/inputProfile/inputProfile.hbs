@@ -1,0 +1,14 @@
+<div class='form-info__input'>
+    <label class='form-info-title'>{{title}}</label>
+    <input
+            name={{name}}
+            type={{type}}
+            class='form-info__box'
+            value={{value}}
+        {{#if readonly}}
+            readonly
+            disabled
+        {{/if}}
+    />
+    <div class='error'></div>
+</div>

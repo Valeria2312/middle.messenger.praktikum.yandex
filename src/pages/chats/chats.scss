@@ -25,7 +25,7 @@
   }
 }
 
-.list-chats {
+.list-chats{
   &__search {
     width: 90%;
     height: 32px;
@@ -169,22 +169,13 @@
 }
 
 .submenu {
-  visibility: hidden;
+  display: none;
   border-radius: 12px;
   background: #FFF;
   box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.14);
-
-  &-item_plus {
-    background: url("./image/Plus.svg") center center no-repeat;
-  }
-
-  &item_delete {
-    background: url("./image/Delete.svg") center center no-repeat;
-  }
 }
 
 .chat-menu:hover .submenu {
-  visibility: visible;
   position: absolute;
   right: 20px;
   padding: 19px 15px 19px 15px;
@@ -215,6 +206,20 @@
   &-main {
     height: 90%;
     overflow-y: auto;
+  }
+  &-main::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  &-main::-webkit-scrollbar-track {
+    -webkit-box-shadow: 5px 5px 5px -5px rgba(34, 60, 80, 0.2) inset;
+    background-color: #f9f9fd;
+    border-radius: 10px;
+  }
+
+  &-main::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: linear-gradient(180deg, #00c6fb, #005bea);
   }
 
   &_day {
@@ -279,19 +284,14 @@
     width: 33px;
     height: 28px;
     background: url('./image/Group 202.svg') center center no-repeat;
-  }
-
-  &-addNewMessage {
-    border-radius: 30px;
-    border: none;
-    background: #EFEFEF;
-    height: 32px;
-    width: 100%;
-    margin: 0 10px 0 10px;
-    padding: 10px 20px 10px 20px;
+    cursor: pointer;
   }
 }
 
 .chat__item--responder .chat__message {
   flex-direction: row-reverse;
+}
+.inputMessage {
+    width: calc(1426px - 66px);
+    display: flex;
 }
