@@ -15,7 +15,6 @@ Handlebars.registerPartial('link', linkPartial);
 Handlebars.registerPartial('chat', chatPartial);
 Handlebars.registerPartial('chatItem', chatItemPartial);
 
-import {renderDom} from "./utilities/renderDOM";
 import {LoginPage} from "./pages/login/login";
 import {RegistrationPage} from './pages/registration/registration';
 import {ErrorPage} from "./pages/error/error";
@@ -23,6 +22,7 @@ import {ProfilePage} from "./pages/profile/profile";
 import {ProfileDataChangePage} from './pages/profile/profileDataChange/profileDataChange';
 import {ProfilePasswordChangePage} from './pages/profile/profilePasswordChange/profilePasswordChange';
 import {ChatsPage} from "./pages/chats/chats";
+import Router from './utilities/router';
 
 window.addEventListener("DOMContentLoaded", () => {
     const login = new LoginPage();
@@ -33,37 +33,17 @@ window.addEventListener("DOMContentLoaded", () => {
     const profilePassword = new ProfilePasswordChangePage();
     const chats = new ChatsPage();
 
-    switch (window.location.pathname) {
-    case "/login": {
-        renderDom("app", login);
-        break;
-    }
-    case "/registration": {
-        renderDom("app", registration);
-        break;
-    }
-    case "/error": {
-        renderDom("app", error);
-        break;
-    }
-    case "/profile": {
-        renderDom("app", profile);
-        break;
-    }
-    case "/profileData": {
-        renderDom("app", profileData);
-        break;
-    }
-    case "/profilePassword": {
-        renderDom("app", profilePassword);
-        break;
-    }
-    case "/chat": {
-        renderDom('app', chats);
-        break;
-    }
-    default: {
-        renderDom("app", login);
-    }
-    }
+    // const router = new Router("app");
+
+    // Можно обновиться на /user и получить сразу пользователя
+    Router
+        .use("/", login)
+        .use("/login", login)
+        .use("/registration", registration)
+        .use("/error", error)
+        .use("/profile", profile)
+        .use("/profileData", profileData)
+        .use("/profilePassword", profilePassword)
+        .use("/chat", chats)
+        .start();
 });

@@ -5,6 +5,7 @@ import template from "./profile.hbs";
 import {Form} from "../../partials/form/form";
 import {Link} from "../../partials/link/link";
 
+
 export class ProfilePage extends Block {
     constructor() {
         super();
@@ -81,3 +82,5 @@ export class ProfilePage extends Block {
         return this.compile(template, this.props);
     }
 }
+
+export default ProfilePage;

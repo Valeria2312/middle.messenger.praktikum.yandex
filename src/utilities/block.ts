@@ -37,7 +37,7 @@ class Block <P extends Record<string, never> = never> {
     }
 
     // получение дочерних компонентов
-    _getChildren(childrenAndProps: P): { props: P, children: Record<string, Block>} {
+    _getChildren(childrenAndProps: P): { props: P, children: Record<string, Block>}{
         const props: Record<string, unknown> = {};
         const children: Record<string, Block> = {};
         if (childrenAndProps) {
@@ -106,7 +106,7 @@ class Block <P extends Record<string, never> = never> {
         }
     }
 
-    componentDidUpdate() {
+    componentDidUpdate(): boolean {
         return true;
     }
 

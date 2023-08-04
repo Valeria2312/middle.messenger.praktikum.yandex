@@ -1,5 +1,13 @@
 import { collectData } from './collectData';
 
+export type TUser = {
+  first_name?:string,
+  second_name?: string,
+  login?: string,
+  email?: string,
+  password?: string,
+  phone?: string
+}
 interface validInput {
     RegExp: RegExp;
     errorMessage: string;
@@ -52,13 +60,15 @@ export const validationCheck = (elementEvent: Event) => {
 export const handleFormSubmit = (elementEvent: Event) => {
     elementEvent.preventDefault();
     const formInputs = document.querySelectorAll<HTMLInputElement>(".form-input");
-    const data: Record<string, string> = {};
+    const data: TUser = {};
 
     formInputs.forEach((formInput: HTMLInputElement) => {
         const input = formInput.querySelector('input') as HTMLInputElement;
         checkValid(input,data);
     });
     collectData(data, formInputs);
+    console.log(data);
+    return data;
 };
 
 function checkValid(input: HTMLInputElement, data?: Record<string, string>) {
