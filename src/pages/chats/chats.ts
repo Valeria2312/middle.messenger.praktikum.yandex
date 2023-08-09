@@ -49,26 +49,26 @@ class ChatsPage extends Block {
         // console.log(user);
         //
 
-        const chatsResult: Array<Block> = [];
-        const fullChats = store.getState('chats');
-        console.log(fullChats);
-        fullChats.forEach((item) => {
-            const chat = new ChatItem({
-                name: item.title,
-                content: item.avatar,
-                time: '10:49',
-                count: item.unread_count,
-                events: {
-                    click: async () => {
-                        // console.log("событие на элементе чата", item);
-                        store.set("currentChat",item);
-                    }
-                }
-            });
-            chatsResult.push(chat);
-        });
-        // console.log(store.getState("currentChat").id);
-        this.children.chatItems = chatsResult;
+        // const chatsResult: Array<Block> = [];
+        // const fullChats = store.getState('chats');
+        // console.log(fullChats);
+        // fullChats.forEach((item) => {
+        //     const chat = new ChatItem({
+        //         name: item.title,
+        //         content: item.avatar,
+        //         time: '10:49',
+        //         count: item.unread_count,
+        //         events: {
+        //             click: async () => {
+        //                 // console.log("событие на элементе чата", item);
+        //                 store.set("currentChat",item);
+        //             }
+        //         }
+        //     });
+        //     chatsResult.push(chat);
+        // });
+        // // console.log(store.getState("currentChat").id);
+        // this.children.chatItems = chatsResult;
         this.children.currentChat = new Chat({});
     }
     render() {
