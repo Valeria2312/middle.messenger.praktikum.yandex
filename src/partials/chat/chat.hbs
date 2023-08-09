@@ -6,20 +6,20 @@
             </div>
             <h2 class="chat-people__name">Андрей</h2>
         </div>
+
         <div class="chat-menu">
+            <div class="chat-menu-points">
+            </div>
             <div class="submenu">
-                <div class="submenu-item_plus">Добавить пользователя
-                </div>
-                <div class="submenu-item_delete">Удалить пользователя
-                </div>
+                {{{addUserInChat}}}
+                {{{deleteChat}}}
+                {{{deleteUser}}}
             </div>
         </div>
+
     </div>
     <div class="chat-main">
-
-
         <h3 class="chat__day">19 июня</h3>
-
         <div class="chat__content">
                     {{{messageFrom1}}}
                     {{{messageFrom2}}}
@@ -33,4 +33,8 @@
         {{{inputMessage}}}
         <button class="chat-pushNewMessage"></button>
     </div>
+    {{{modaladdUserInChat}}}
+    {{{modalDeleteChat}}}
+    {{{modalDeleteUser}}}
 </div>
+

@@ -1,29 +1,37 @@
-type Indexed<T = any> = {
-  [key in string]: T;
-};
+export function merge(lhs: any, rhs: any): any {
+    for (const p in rhs) {
+        if (!Object.prototype.hasOwnProperty.call(rhs,p)) {
+            continue;
+        }
 
-function merge(lhs: Indexed, rhs: Indexed): Indexed {
-    if (typeof lhs === 'object' && typeof rhs === 'object') {
-        for (const key in rhs) {
-            if (typeof rhs[key] === 'object') {
-                if (!lhs[key]) Object.assign(lhs, { [key]: {} });
-                merge(lhs[key], rhs[key]);
+        try {
+            if (rhs[p].constructor === Object) {
+                rhs[p] = merge(lhs[p] as any, rhs[p] as any);
             } else {
-                Object.assign(lhs, { [key]: rhs[key] });
+                lhs[p] = rhs[p];
             }
+        } catch (e) {
+            lhs[p] = rhs[p];
         }
     }
+
     return lhs;
 }
-function set(object: Indexed | unknown, path: string, value: unknown): Indexed | unknown {
-    if (typeof path !== 'string')
-        throw new Error('path must be string');
-    if (typeof object !== 'object' || object === null)
+
+export function set(object: any | unknown, path: string, value: unknown): any | unknown {
+    if (typeof object !== 'object' || object === null) {
         return object;
-    const newObj = path.split('.').reduceRight<Indexed>((acc, key) => ({
+    }
+
+    if (typeof path !== 'string') {
+        throw new Error('path must be string');
+    }
+
+    const result = path.split('.').reduceRight<any>((acc, key) => ({
         [key]: acc,
     }), value as any);
-    return merge(object as Indexed, newObj);
+
+    return merge(object as any, result);
 }
 
 export default set;

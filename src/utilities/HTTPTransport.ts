@@ -45,7 +45,7 @@ class HTTPTransport {
     };
 
     request = (url:string, options: Options, timeout = 5000): Promise<XMLHttpRequest> => {
-        const {headers = {'Content-Type': 'application/json',}, method, data} = options;
+        const {headers = {}, method, data} = options;
 
         return new Promise(function(resolve, reject) {
             if (!method) {
@@ -65,6 +65,15 @@ class HTTPTransport {
                     ? `${url}${queryStringify(data)}`
                     : url,
             );
+            xhr.onreadystatechange = () => {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status < 400) {
+                        resolve(xhr.response);
+                    } else {
+                        reject(xhr.response);
+                    }
+                }
+            };
 
             Object.keys(headers).forEach(key => {
                 xhr.setRequestHeader(key, headers[key]);
@@ -80,22 +89,23 @@ class HTTPTransport {
 
             xhr.timeout = timeout;
             xhr.ontimeout = reject;
-
-            // xhr.onabort = () => reject({reason: 'abort'});
-            //   xhr.onerror = () => reject({reason: 'network error'});
             xhr.withCredentials = true;
             xhr.responseType = 'json';
-            // xhr.timeout = timeout;
-            // xhr.ontimeout = () => reject({reason: 'timeout'});
 
             if (isGet || !data) {
                 xhr.send();
-                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             } else if (data instanceof FormData){
                 xhr.send(data);
             } else {
+                xhr.setRequestHeader("Content-Type", "application/json");
                 xhr.send(JSON.stringify(data));
             }
+
+            // if (isGet || !data) {
+            //     xhr.send();
+            // } else {
+            //     xhr.send(JSON.stringify(data));
+            // }
         });
     };
 }

@@ -8,12 +8,18 @@
   width: 310px;
   padding-top: 21px;
 }
+.menu-chats{
+  display: flex;
+  justify-content: space-between;
+  padding: 0 10px 0 10px;
+}
 
 .link-profile {
   display: flex;
   justify-content: flex-end;
   margin-right: 10px;
   margin-bottom: 23px;
+  padding-top: 17px;
 
   &__link {
     margin-right: 8px;
@@ -156,20 +162,23 @@
     }
   }
 }
-
 .chat-menu {
+  position: relative;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
+.chat-menu-points {
   position: relative;
   width: 3px;
   height: 3px;
   background-color: black;
-  border-radius: 50%;
   top: 10px;
-  right: 10px;
   cursor: pointer;
 }
 
-.submenu {
-  display: none;
+.submenu, .submenu_addChat {
+  visibility: hidden;
   border-radius: 12px;
   background: #FFF;
   box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.14);
@@ -179,12 +188,22 @@
   position: absolute;
   right: 20px;
   padding: 19px 15px 19px 15px;
+  visibility: visible;
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
 
-.chat-menu:before, .chat-menu:after {
+.chat-menu:hover .submenu_addChat {
+  position: absolute;
+  padding: 19px 15px 19px 15px;
+  visibility: visible;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.chat-menu-points:before, .chat-menu-points:after {
   content: "";
   position: absolute;
   width: 100%;
@@ -194,11 +213,11 @@
   border-radius: inherit;
 }
 
-.chat-menu:before {
+.chat-menu-points:before {
   top: 10px;
 }
 
-.chat-menu:after {
+.chat-menu-points:after {
   top: 20px;
 }
 

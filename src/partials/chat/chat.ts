@@ -3,18 +3,87 @@ import template from "./chat.hbs";
 import { messageFrom } from '../messageFrom/messageFrom';
 import { messageTo } from '../MessageTo/MessageTo';
 import { InputContainer } from '../InputContainer/inputContainer';
-import { validationCheck } from '../../utilities/validation';
+import { handleFormSubmit, validationCheck } from '../../utilities/validation';
+import { subMenuItem } from '../addUserInChat/addUserInChat';
+import { chatModal } from '../chatModal/chatModal';
+import ChatAPI from '../../controllers/chat-api';
 
-interface ChatProps {
-    children?: Block[];
-}
+interface ChatProps {}
 
 export class Chat extends Block {
     constructor(props: ChatProps) {
         super('div',props);
     }
     init() {
-        super.init();
+        // super.init();
+        // console.log(this.props);
+        this.children.modaladdUserInChat = new chatModal({
+            title: "Добавить пользователя",
+            name: "login",
+            type: "text",
+            placeholder: "Введите логин пользователя",
+            nameBtn: "Добавить",
+            events: {
+                submit: (e) => {
+                    const chatData = handleFormSubmit(e);
+                    console.log(chatData);
+                    //currentChat!.id
+                    // ChatAPI.addUsersToChat(chatData);
+                    this.children.modalDeleteChat.hide();
+
+                }
+            }
+
+        });
+        this.children.modalDeleteChat = new chatModal({
+            title: "Удалить чат",
+            name: "chatId",
+            type: "text",
+            placeholder: "Введите ID чата",
+            nameBtn: "Удалить",
+            events: {
+                submit: (e) => {
+                    const chatData = handleFormSubmit(e);
+                    console.log(chatData);
+                    ChatAPI.deleteChat(chatData);
+                    this.children.modalDeleteChat.hide();
+
+                }
+            }
+        });
+        this.children.modalDeleteUser = new chatModal({
+            title: "Удалить пользователя",
+            name: "login",
+            type: "text",
+            placeholder: "Введите логин пользователя",
+            nameBtn: "Удалить",
+        });
+
+        this.children.addUserInChat = new subMenuItem({
+            text: "Добавить пользователя",
+            events: {
+                click:() => {
+                    this.children.modaladdUserInChat.show();
+                }
+            }
+        });
+        this.children.deleteChat = new subMenuItem({
+            text: "Удалить чат",
+            events: {
+                click:() => {
+                    this.children.modalDeleteChat.show();
+                }
+            }
+        });
+        this.children.deleteUser = new subMenuItem({
+            text: "Удалить пользователя",
+            events: {
+                click:() => {
+                    this.children.modalDeleteUser.show();
+                }
+            }
+        });
+
         this.children.messageFrom1 = new messageFrom({
             text: "Привет! Смотри, тут всплыл интересный кусок лунной\n" +
               "                            космической истории — НАСА в какой-то момент попросила Хассельблад адаптировать модель SWC\n" +

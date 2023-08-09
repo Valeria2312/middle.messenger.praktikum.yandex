@@ -6,14 +6,12 @@ import { InputContainer } from '../../partials/InputContainer/inputContainer';
 import { Form } from '../../partials/form/form';
 import { handleFormSubmit, validationCheck } from '../../utilities/validation';
 import { Link } from '../../partials/link/link';
-import UserAuth from '../../api/user-auth';
+import AuthApi from '../../controllers/auth-api';
 import router from '../../utilities/router';
 
 export class RegistrationPage extends Block {
-    UserAuth: UserAuth;
     constructor() {
         super();
-        this.UserAuth = new UserAuth;
     }
 
     init() {
@@ -25,7 +23,7 @@ export class RegistrationPage extends Block {
                     e.preventDefault();
                     const signupData = handleFormSubmit(e);
                     if(signupData) {
-                        this.UserAuth.singUp(signupData)
+                        AuthApi.singUp(signupData)
                             .then(res =>console.log(res));
                         router.go("/profile");
 

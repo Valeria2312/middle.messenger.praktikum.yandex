@@ -1,0 +1,33 @@
+.modal{
+  display: none;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  opacity: 0.8;
+  &_overlay {
+    position: fixed;
+    overflow: hidden;
+    overflow-y: auto;
+    //display: none;
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    align-items: center;
+    background: #FFF;
+    max-width: 320px;
+    min-height: 239px;
+    width: 100%;
+    border: 1px solid rgba(76, 76, 255);
+    border-radius: 40px;
+    top: 15%;
+    left: 30%;
+    flex-direction: column;
+    z-index: 99;
+  }
+  &.active {
+    display: block;
+  }
+}

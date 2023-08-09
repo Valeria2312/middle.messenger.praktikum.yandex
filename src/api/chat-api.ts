@@ -1,19 +1,39 @@
 import HTTPTransport from '../utilities/HTTPTransport';
 import { url } from '../utilities/constants';
 
-export type Indexed<T = any> = {
-  [key in string]: T;
-};
+export interface ICreateChat {
+  title?: string,
+  chatId?: string
+}
+export interface IAddUsersInChat {
+  users: number[],
+  chatId: number | undefined,
+}
 
+//api
 class ChatsAPI {
     http: HTTPTransport;
 
     constructor() {
         this.http = new HTTPTransport();
     }
-
-    getChats(data: Indexed) {
-        return this.http.get(url + '/chats', { data });
+    getChats() {
+        return this.http.get(url + '/chats');
+    }
+    createChat(data:ICreateChat){
+        return this.http.post(url + '/chats', {data});
+    }
+    deleteChat(data:ICreateChat){
+        return this.http.delete(url + '/chats', {data});
+    }
+    addUsers(data: IAddUsersInChat) {
+        return this.http.put(url + '/chats/users' + {data});
+    }
+    deleteUsers(data: IAddUsersInChat){
+        return this.http.delete(url + '/chats/users', {data});
+    }
+    getChatToken(data: number) {
+        return this.http.post(`/chats/token/${data}`);
     }
 }
 export default ChatsAPI;

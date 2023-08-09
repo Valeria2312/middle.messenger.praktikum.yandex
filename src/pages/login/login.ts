@@ -6,14 +6,11 @@ import { InputContainer } from '../../partials/InputContainer/inputContainer';
 import { handleFormSubmit, validationCheck } from '../../utilities/validation';
 import { Form } from '../../partials/form/form';
 import { Link } from '../../partials/link/link';
-import UserAuth from '../../api/user-auth';
-import router from '../../utilities/router';
+import AuthApi from '../../controllers/auth-api';
 
 export class LoginPage extends Block {
-    UserAuth: UserAuth;
     constructor() {
         super();
-        this.UserAuth = new UserAuth;
     }
     init() {
         super.init();
@@ -23,11 +20,7 @@ export class LoginPage extends Block {
                 submit: (e) => {
                     const signinData = handleFormSubmit(e);
                     if (signinData) {
-                        this.UserAuth.singIn(signinData);
-                        this.UserAuth.getUser()
-                            .then(() => {
-                                router.go("/chat");
-                            });
+                        AuthApi.singIn(signinData);
                     }
                 }
             },

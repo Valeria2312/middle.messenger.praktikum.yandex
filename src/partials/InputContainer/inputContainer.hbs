@@ -7,6 +7,10 @@
             class='input'
             placeholder="{{placeholder}}"
             value="{{value}}"
+        {{#if readonly}}
+            readonly
+            disabled
+        {{/if}}
     />
     <div class='error'></div>
 </div>

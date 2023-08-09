@@ -1,17 +1,27 @@
 <main class='chats'>
     <section class="list-chats">
-        <div class="link-profile">
-            <a href="/profile" class="link-profile__link">Профиль</a>
-            <img class="link-profile__img" src="../../pages/chats/image/Polygon%201.svg" alt="Переход на профиль">
+        <div class="menu-chats">
+            <div class="chat-menu">
+                <div class="chat-menu-points">
+                </div>
+                <div class="submenu_addChat">
+                    {{{addChat}}}
+                </div>
+            </div>
+            <div class="link-profile">
+                <a href="/profile" class="link-profile__link">Профиль</a>
+                <img class="link-profile__img" src="../../pages/chats/image/Polygon%201.svg" alt="Переход на профиль">
+            </div>
         </div>
         <label>
             <input class="list-chats__search" type="text" placeholder='Поиск'>
         </label>
         <div class="list-chats__items">
-            {{{chatItem}}}
+            {{{chatItems}}}
         </div>
     </section>
     <section class="chat-openItem">
-        {{{chat}}}
+        {{{currentChat}}}
     </section>
+    {{{modalAddChat}}}
 </main>
