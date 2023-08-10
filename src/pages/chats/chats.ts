@@ -1,7 +1,7 @@
 import './chats.scss';
 import template from "./chats.hbs";
 import Block from '../../utilities/block';
-import {ChatItem} from "../../partials/chatItem/chatItem";
+// import {ChatItem} from "../../partials/chatItem/chatItem";
 import {Chat} from "../../partials/chat/chat";
 import store, { connect } from '../../utilities/store';
 import { chatModal } from '../../partials/chatModal/chatModal';
@@ -10,15 +10,13 @@ import { handleFormSubmit } from '../../utilities/validation';
 import ChatAPI from '../../controllers/chat-api';
 
 interface ChatProps {}
-class ChatsPage extends Block {
+export class ChatsPage extends Block {
     constructor(props: ChatProps) {
         super('div',props);
-
+        ChatAPI.getChats();
     }
     init() {
-        ChatAPI.getChats();
-        console.log(this.props);
-        // console.log();
+        console.log("пропсы тут должны быть из connect",this.props);
         this.children.modalAddChat = new chatModal({
             title: "Добавить чат",
             name: "title",
@@ -43,45 +41,21 @@ class ChatsPage extends Block {
             }
         });
 
-        //так работает
+        console.log("Вывод store.getState() в чатах",store.getState());
+        console.log("Вывод store.getState().chats в чатах",store.getState().chats);
 
-        // const user = store.getState('chats');
-        // console.log(user);
-        //
-
-        // const chatsResult: Array<Block> = [];
-        // const fullChats = store.getState('chats');
-        // console.log(fullChats);
-        // fullChats.forEach((item) => {
-        //     const chat = new ChatItem({
-        //         name: item.title,
-        //         content: item.avatar,
-        //         time: '10:49',
-        //         count: item.unread_count,
-        //         events: {
-        //             click: async () => {
-        //                 // console.log("событие на элементе чата", item);
-        //                 store.set("currentChat",item);
-        //             }
-        //         }
-        //     });
-        //     chatsResult.push(chat);
-        // });
-        // // console.log(store.getState("currentChat").id);
         // this.children.chatItems = chatsResult;
         this.children.currentChat = new Chat({});
     }
     render() {
+        console.log("пропсы в рендере",this.props);
+        // ChatAPI.getChats();
         return this.compile(template, this.props);
     }
 }
-//это по сути тоже store
-const get = store.getState('chats');
-// console.log(get);
-
-function mapStateToProps(state) {
-    console.log(state);
-    return state;
+function mapStateToProps(state: any) {
+    console.log("mapStateToProps",state.chats);
+    return state.chats;
 }
 
 export default connect(mapStateToProps)(ChatsPage);

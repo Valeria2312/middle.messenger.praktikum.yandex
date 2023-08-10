@@ -12,7 +12,7 @@ class ChatAPI {
         await this.ChatsAPI.getChats()
             // .then((res) => console.log(res));
             .then((res) => store.set('chats', res));
-        store.on('update', () => {console.log('update');});
+        store.on('updated', () => {console.log('update');});
     }
     async createChat(data: ICreateChat) {
         await this.ChatsAPI.createChat(data)

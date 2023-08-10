@@ -25,7 +25,7 @@ import {ErrorPage} from "./pages/error/error";
 import {ProfilePage} from "./pages/profile/profile";
 import {ProfileDataChangePage} from './pages/profile/profileDataChange/profileDataChange';
 import {ProfilePasswordChangePage} from './pages/profile/profilePasswordChange/profilePasswordChange';
-import ChatsPage from "./pages/chats/chats";
+import { ChatsPage } from "./pages/chats/chats";
 import Router from './utilities/router';
 
 window.addEventListener("DOMContentLoaded", () => {
@@ -35,7 +35,7 @@ window.addEventListener("DOMContentLoaded", () => {
     const profile = new ProfilePage();
     const profileData = new ProfileDataChangePage();
     const profilePassword = new ProfilePasswordChangePage();
-    const chats = new ChatsPage();
+    const chats = new ChatsPage({title: 'pf'});
     // const router = new Router("app");
 
     // Можно обновиться на /user и получить сразу пользователя
