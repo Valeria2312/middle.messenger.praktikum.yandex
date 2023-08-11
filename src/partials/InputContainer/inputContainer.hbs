@@ -1,10 +1,10 @@
 <div class='{{class}}'>
-    <label for='input' class='form-title'>{{text}}</label>
+    <label for='input' class='form-title {{{classLbl}}}'>{{text}}</label>
     <input
             id='input'
             type='{{type}}'
             name='{{name}}'
-            class='input'
+            class='input {{classInput}}'
             placeholder="{{placeholder}}"
             value="{{value}}"
         {{#if readonly}}

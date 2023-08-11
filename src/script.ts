@@ -25,17 +25,19 @@ import {ErrorPage} from "./pages/error/error";
 import {ProfilePage} from "./pages/profile/profile";
 import {ProfileDataChangePage} from './pages/profile/profileDataChange/profileDataChange';
 import {ProfilePasswordChangePage} from './pages/profile/profilePasswordChange/profilePasswordChange';
-import { ChatsPage } from "./pages/chats/chats";
+import ChatsPage from "./pages/chats/chats";
 import Router from './utilities/router';
 
+const login = new LoginPage();
+const registration = new RegistrationPage();
+const error = new ErrorPage();
+const profile = new ProfilePage();
+const profileData = new ProfileDataChangePage();
+const profilePassword = new ProfilePasswordChangePage();
+const chats = new ChatsPage({title: 'pf'});
+
 window.addEventListener("DOMContentLoaded", () => {
-    const login = new LoginPage();
-    const registration = new RegistrationPage();
-    const error = new ErrorPage();
-    const profile = new ProfilePage();
-    const profileData = new ProfileDataChangePage();
-    const profilePassword = new ProfilePasswordChangePage();
-    const chats = new ChatsPage({title: 'pf'});
+
     // const router = new Router("app");
 
     // Можно обновиться на /user и получить сразу пользователя

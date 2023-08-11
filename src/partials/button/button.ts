@@ -5,6 +5,7 @@ interface ButtonProps {
     name?: string;
     type?: string;
     href?: string;
+    class?:string;
     events?: {
       click?: (event: any) => void
   }

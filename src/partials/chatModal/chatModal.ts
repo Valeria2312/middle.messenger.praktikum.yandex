@@ -11,6 +11,7 @@ interface chatModalProps {
   placeholder?: string
   type?: string
   nameBtn?: string
+  value?: number
   events?: {
     submit?: (event: PointerEvent) => void
   }
@@ -29,7 +30,7 @@ export class chatModal extends Block {
                     name:this.props.name,
                     type: this.props.type,
                     placeholder: this.props.placeholder,
-                    value: '',
+                    value: this.props.value || '',
                     events: {
                         blur: (e: FocusEvent) => {
                             validationCheck(e);

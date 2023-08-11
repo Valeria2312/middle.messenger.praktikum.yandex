@@ -13,10 +13,11 @@ import { Button } from '../../partials/button/button';
 export class ProfilePage extends Block {
     constructor() {
         super();
+        AuthApi.getUser();
     }
     init() {
         this.children.avatar = new Avatar({
-            name: store.getState().login,
+            name: store.getState().user,
             srcImage:`https://ya-praktikum.tech/api/v2/resources${store.getState().avatar}`,
             events: {
                 click: () => {

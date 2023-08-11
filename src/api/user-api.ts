@@ -9,7 +9,6 @@ class UserAPI {
     constructor() {
         this.http = new HTTPTransport();
     }
-
     changeProfile(data: TUser) {
         return this.http.put(url + '/user/profile', { data });
     }
@@ -19,6 +18,8 @@ class UserAPI {
     setAvatar(data: any) {
         return this.http.put(url + '/user/profile/avatar',{data});
     }
-
+    searchUser(data: any) {
+        return this.http.post(url +"/user/search", {data});
+    }
 }
 export default UserAPI;

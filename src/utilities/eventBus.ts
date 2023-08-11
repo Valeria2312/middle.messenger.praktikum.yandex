@@ -24,9 +24,9 @@
 //     }
 //
 //     emit(event: string, ...args:any) {
-//         console.log(event);
-//         console.log(this.listeners);
-//         console.log(args);
+//         // console.log(event);
+//         // console.log(this.listeners);
+//         // console.log(args);
 //         if (!this.listeners[event]) {
 //             throw new Error(`Нет события: ${event}`);
 //         }
@@ -36,7 +36,7 @@
 //         });
 //     }
 // }
-
+//
 export type Listener<T extends unknown[] = any[]> = (...args: T) => void;
 
 class EventBus<

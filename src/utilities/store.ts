@@ -11,6 +11,7 @@ export interface State {
   user?: any
   chats?: any
   activeChat?: any,
+  // lastMessage?: any[]
 }
 
 export class Store extends EventBus {
@@ -38,38 +39,37 @@ export class Store extends EventBus {
 }
 
 const store = new Store();
-console.log(store);
+console.log(store.getState());
 
 export function connect(mapStateToProps: any) {
     return function (Component: any) {
         return class extends Component {
-            constructor(tag: string,props: any) {
+            constructor(tag: string, props: any) {
                 // сохраняем начальное состояние
                 let state = mapStateToProps(store.getState());
                 super(tag,{ ...props, ...state });
-                console.log("показываю пропсы in connect",props);
-                console.log("показываю mapStateToProps in connect",mapStateToProps(store.getState()));
-                console.log("показываю стейт in connect",store.getState());
-                console.log("показываю state in connect",state);
+                // console.log("показываю пропсы in connect",props);
+                // console.log("показываю mapStateToProps in connect",mapStateToProps(store.getState()));
+                // console.log("показываю стейт in connect",store.getState());
+                // console.log("показываю state in connect",state);
                 // подписываемся на событие
                 store.on('updated', () => {
                     // при обновлении получаем новое состояние
                     const newState = mapStateToProps(store.getState());
                     // если что-то из используемых данных поменялось, обновляем компонент
-
-                    console.log(!isEqual(store.getState(), newState));
-                    console.log("это newState in connect",newState);
-                    console.log("это store.getState() in connect",store.getState());
-                    const equal = isEqual(store.getState(), newState);
-                    console.log(equal);
+                    // console.log(!isEqual(store.getState(), newState));
+                    // console.log("это newState in connect",newState);
+                    // console.log("это store.getState() in connect",store.getState());
+                    // const equal = isEqual(store.getState(), newState);
+                    // console.log(equal);
                     if (!isEqual(state, newState)) {
-                        console.log('я в условии');
-                        console.log(newState);
+                        // console.log('я в условии');
+                        // console.log(newState);
                         this.setProps(store.getState());
                     }
                     // не забываем сохранить новое состояние
                     state = newState;
-                    console.log("показываю state", state);
+                    // console.log("показываю state", state);
                 });
             }
         };

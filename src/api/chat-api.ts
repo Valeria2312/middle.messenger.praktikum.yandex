@@ -6,7 +6,7 @@ export interface ICreateChat {
   chatId?: string
 }
 export interface IAddUsersInChat {
-  users: number[],
+  users: any[],
   chatId: number | undefined,
 }
 
@@ -27,13 +27,13 @@ class ChatsAPI {
         return this.http.delete(url + '/chats', {data});
     }
     addUsers(data: IAddUsersInChat) {
-        return this.http.put(url + '/chats/users' + {data});
+        return this.http.put(url + '/chats/users',{data});
     }
     deleteUsers(data: IAddUsersInChat){
         return this.http.delete(url + '/chats/users', {data});
     }
     getChatToken(data: number) {
-        return this.http.post(`/chats/token/${data}`);
+        return this.http.post(url + `/chats/token/${data}`);
     }
 }
 export default ChatsAPI;

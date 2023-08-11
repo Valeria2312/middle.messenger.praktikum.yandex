@@ -26,6 +26,10 @@ const validDataInputs: Record<string, validInput> = {
         RegExp: /^(?!^\d+)[a-zA-Z\d-_]{3,20}$/,
         errorMessage:'Логин от 3 до 20 символов, латиницей, может содержать цифры',
     },
+    users: {
+        RegExp: /^(?!^\d+)[a-zA-Z\d-_]{3,20}$/,
+        errorMessage:'Логин от 3 до 20 символов, латиницей, может содержать цифры',
+    },
     title: {
         RegExp: /^(?!^\d+)[a-zA-Z\d-_]{3,20}$/,
         errorMessage:'Логин от 3 до 20 символов, латиницей, может содержать цифры',
@@ -70,6 +74,7 @@ const validDataInputs: Record<string, validInput> = {
 
 export const validationCheck = (elementEvent: Event) => {
     const input = elementEvent.target as HTMLInputElement;
+    console.log(input);
     checkValid(input);
 };
 

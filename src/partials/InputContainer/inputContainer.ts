@@ -9,6 +9,8 @@ export interface InputProps {
     value?: string;
     readonly?: boolean,
     placeholder?: string,
+    classLbl?: string,
+    classInput?: string,
     events?: {
         blur?: (e: FocusEvent) => void
     }

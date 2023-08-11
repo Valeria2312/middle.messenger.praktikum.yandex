@@ -7,6 +7,7 @@ import { handleFormSubmit, validationCheck } from '../../utilities/validation';
 import { Form } from '../../partials/form/form';
 import { Link } from '../../partials/link/link';
 import AuthApi from '../../controllers/auth-api';
+import ChatApi from '../../controllers/chat-api';
 
 export class LoginPage extends Block {
     constructor() {
@@ -20,7 +21,8 @@ export class LoginPage extends Block {
                 submit: (e) => {
                     const signinData = handleFormSubmit(e);
                     if (signinData) {
-                        AuthApi.singIn(signinData);
+                        AuthApi.singIn(signinData).then(() => ChatApi.getChats());
+                        // ChatApi.getChats();
                     }
                 }
             },
