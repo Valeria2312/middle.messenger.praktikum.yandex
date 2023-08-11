@@ -20,8 +20,55 @@
             {{{chatItems}}}
         </div>
     </section>
+    {{#if currentChat}}
     <section class="chat-openItem">
-        {{{currentChat}}}
+<!--        {{{currentChat}}}-->
+        <div class="chat">
+            <div class="chat-title">
+                    <div class="chat-people">
+                        <div class="chat-people__img">
+                            {{#if currentChat.avatar}}
+                                <img class="chat__header-avatar-img" src="https://ya-praktikum.tech/api/v2/resources{{currentChat.avatar}}" alt="изображение собеседника">
+                            {{/if}}
+                        </div>
+
+                        <h2 class="chat-people__name">{{{currentChat.title}}}</h2>
+                    </div>
+                <div class="chat-menu">
+                    <div class="chat-menu-points">
+                    </div>
+                    <div class="submenu">
+                        {{{addUserInChat}}}
+                        {{{deleteChat}}}
+                        {{{deleteUser}}}
+                    </div>
+                </div>
+            </div>
+            <div class="chat-main">
+                <!--        <h3 class="chat__day">19 июня</h3>-->
+                <div class="chat__content">
+<!--                    {{#each lastMessage}}-->
+<!--                        {{{this}}}-->
+<!--                    {{/each}}-->
+<!--                    {{{activeChat}}}-->
+<!--    {{#each array}}-->
+<!--        {{this.content}}-->
+<!--        {{this.time}}-->
+<!--    {{/each}}-->
+                    {{{activeChat}}}
+                </div>
+            </div>
+            <div class="chat-newMessage">
+                <!--        <div class="chat-addFile"></div>-->
+                {{{inputFile}}}
+                {{{inputMessage}}}
+                {{{button}}}
+            </div>
+            {{{modaladdUserInChat}}}
+            {{{modalDeleteChat}}}
+            {{{modalDeleteUser}}}
+        </div>
     </section>
+    {{/if}}
     {{{modalAddChat}}}
 </main>

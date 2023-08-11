@@ -28,8 +28,25 @@ class chatWS {
         });
 
         this.socket.addEventListener('message', event => {
-            console.log('Получены данные', event.data);
-            store.set('lastMessage', event.data);
+            const data = JSON.parse(event.data);
+            console.log(store.getState().lastMessage);
+            if (data && data.type !== "error" && data.type !== "pong" && data.type !== "user connected") {
+
+                if (Array.isArray(data)) {
+                    data.sort((a, b) => {
+                        return Date.parse(a.time) - Date.parse(b.time);
+                    });
+                }
+
+                if (Array.isArray(data)) {
+                    store.set('lastMessage', data);
+                } else {
+                    store.set('lastMessage', data);
+                }
+            }
+            // console.log('Получены данные', event.data);
+            // store.set('lastMessage', event.data);
+            // console.log('стор',store.getState());
         });
 
         this.socket.addEventListener('error', event => {

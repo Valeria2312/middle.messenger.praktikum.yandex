@@ -11,7 +11,7 @@ export interface State {
   user?: any
   chats?: any
   activeChat?: any,
-  // lastMessage?: any[]
+  lastMessage?: any
 }
 
 export class Store extends EventBus {

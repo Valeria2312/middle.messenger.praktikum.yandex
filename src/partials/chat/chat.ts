@@ -122,7 +122,6 @@ export class Chat extends Block {
         //     return;
         // }
         // this.children.userMessages =
-
         //
         // this.children.messageFrom1 = new messageFrom({
         //     text: "Привет! Смотри, тут всплыл интересный кусок лунной\n" +
@@ -169,20 +168,20 @@ export class Chat extends Block {
         //         }
         //     },
         // }),
-        this.children.inputMessage = new InputContainer({
-            class: 'form-input inputMessage',
-            classInput: 'addMessage',
-            name: "message",
-            type: 'text',
-            value:"",
-            events: {
-                blur: (e: FocusEvent) => {
-                    // const data = validationCheck(e);
-                    // console.log(data);
-                    // ChatAPI.sendMessage(e);
-                }
-            },
-        }),
+        // this.children.inputMessage = new InputContainer({
+        //     class: 'form-input inputMessage',
+        //     classInput: 'addMessage',
+        //     name: "message",
+        //     type: 'text',
+        //     value:"",
+        //     events: {
+        //         blur: (e: FocusEvent) => {
+        //             // const data = validationCheck(e);
+        //             // console.log(data);
+        //             // ChatAPI.sendMessage(e);
+        //         }
+        //     },
+        // }),
         this.children.button = new Button({
             class: "chat-pushNewMessage",
             events: {

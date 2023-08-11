@@ -60,10 +60,6 @@ class ChatAPI {
         const chatId = data;
         const userId = store.getState().user.id;
         const token = localStorage.getItem("token");
-        console.log(userId);
-        console.log(chatId);
-        console.log(token);
-
         const endpoint = `${userId}/${chatId}/${token}`;
         this.socket = new chatWS(endpoint);
 
