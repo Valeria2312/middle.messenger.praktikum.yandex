@@ -20,9 +20,8 @@
             {{{chatItems}}}
         </div>
     </section>
-    {{#if currentChat}}
+{{#if chatId}}
     <section class="chat-openItem">
-<!--        {{{currentChat}}}-->
         <div class="chat">
             <div class="chat-title">
                     <div class="chat-people">
@@ -45,21 +44,15 @@
                 </div>
             </div>
             <div class="chat-main">
-                <!--        <h3 class="chat__day">19 июня</h3>-->
+    {{#if chatId}}
                 <div class="chat__content">
-<!--                    {{#each lastMessage}}-->
-<!--                        {{{this}}}-->
-<!--                    {{/each}}-->
-<!--                    {{{activeChat}}}-->
-<!--    {{#each array}}-->
-<!--        {{this.content}}-->
-<!--        {{this.time}}-->
-<!--    {{/each}}-->
-                    {{{activeChat}}}
+                    {{#each userMessages}}
+                        {{{this}}}
+                    {{/each}}
                 </div>
+    {{/if}}
             </div>
             <div class="chat-newMessage">
-                <!--        <div class="chat-addFile"></div>-->
                 {{{inputFile}}}
                 {{{inputMessage}}}
                 {{{button}}}
@@ -69,6 +62,8 @@
             {{{modalDeleteUser}}}
         </div>
     </section>
+    {{else}}
+        <div class="chat__message-nothing">Выберите чат чтобы отправить сообщение</div>
     {{/if}}
     {{{modalAddChat}}}
 </main>

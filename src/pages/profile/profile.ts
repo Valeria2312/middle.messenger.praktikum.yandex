@@ -10,15 +10,17 @@ import { Modal } from '../../partials/modal/modal';
 import AuthApi from '../../controllers/auth-api';
 import { Button } from '../../partials/button/button';
 
-export class ProfilePage extends Block {
-    constructor() {
-        super();
+
+interface ProfileProps {}
+class ProfilePage extends Block {
+    constructor(props:ProfileProps) {
+        super('div',props);
         AuthApi.getUser();
     }
-    init() {
+    updateUser() {
         this.children.avatar = new Avatar({
-            name: store.getState().user,
-            srcImage:`https://ya-praktikum.tech/api/v2/resources${store.getState().avatar}`,
+            name: store.getState().user?.display_name,
+            srcImage:`https://ya-praktikum.tech/api/v2/resources${store.getState().user?.avatar}`,
             events: {
                 click: () => {
                     this.children.modal.show();
@@ -37,7 +39,7 @@ export class ProfilePage extends Block {
                     text: "Почта",
                     name: "email",
                     type: "email",
-                    value: store.getState().email,
+                    value: store.getState().user?.email,
                     readonly: true,
                 }),
                 new InputContainer({
@@ -45,7 +47,7 @@ export class ProfilePage extends Block {
                     text: "Логин",
                     name: "login",
                     type: "text",
-                    value: store.getState().login,
+                    value: store.getState().user?.login,
                     readonly: true,
                 }),
 
@@ -54,7 +56,7 @@ export class ProfilePage extends Block {
                     text: "Имя",
                     name: "first_name",
                     type: "text",
-                    value: store.getState().first_name,
+                    value: store.getState().user?.first_name,
                     readonly: true,
                 }),
 
@@ -63,7 +65,7 @@ export class ProfilePage extends Block {
                     text: "Фамилия",
                     name: "second_name",
                     type: "text",
-                    value: store.getState().second_name,
+                    value: store.getState().user?.second_name,
                     readonly: true,
                 }),
 
@@ -72,7 +74,7 @@ export class ProfilePage extends Block {
                     text: "Имя в чате",
                     name: "chat_name",
                     type: "text",
-                    value: store.getState().display_name || "",
+                    value: store.getState().user?.display_name || "",
                     readonly: true,
                 }),
 
@@ -81,7 +83,7 @@ export class ProfilePage extends Block {
                     text: "Телефон",
                     name: "phone",
                     type: "text",
-                    value: store.getState().phone,
+                    value: store.getState().user?.phone,
                     readonly: true,
                 }),
                 new Link({
@@ -105,15 +107,16 @@ export class ProfilePage extends Block {
             },
         });
     }
+    init() {
+    }
     render() {
+        this.updateUser();
         return this.compile(template, this.props);
     }
 }
 
 function mapStateToProps(state: any) {
-    return state;
+    return state.user ?? [];
 }
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-export const withUser = connect(ProfilePage, mapStateToProps);
+export default connect(mapStateToProps)(ProfilePage);

@@ -4,7 +4,6 @@ import template from "./profileDataChange.hbs";
 import {Button} from "../../../partials/button/button";
 import { handleFormSubmit, validationCheck } from '../../../utilities/validation';
 import { InputContainer } from '../../../partials/InputContainer/inputContainer';
-import store from '../../../utilities/store';
 import UserAPI from '../../../controllers/user-api';
 
 export class ProfileDataChangePage extends Block {
@@ -27,7 +26,7 @@ export class ProfileDataChangePage extends Block {
                     text: "Почта",
                     name: "email",
                     type: "email",
-                    value: store.getState().email || "",
+                    value:"",
                     events: {
                         blur: (e: FocusEvent) => { validationCheck(e); }
                     },
@@ -37,7 +36,7 @@ export class ProfileDataChangePage extends Block {
                     text: "Логин",
                     name: "login",
                     type: "text",
-                    value: store.getState().login || "",
+                    value: "",
                     events: {
                         blur: (e: FocusEvent) => { validationCheck(e); }
                     },
@@ -48,7 +47,7 @@ export class ProfileDataChangePage extends Block {
                     text: "Имя",
                     name: "first_name",
                     type: "text",
-                    value: store.getState().first_name || "",
+                    value: "",
                     events: {
                         blur: (e: FocusEvent) => { validationCheck(e); }
                     },
@@ -59,7 +58,7 @@ export class ProfileDataChangePage extends Block {
                     text: "Фамилия",
                     name: "second_name",
                     type: "text",
-                    value: store.getState().second_name,
+                    value:'',
                     events: {
                         blur: (e: FocusEvent) => { validationCheck(e); }
                     },
@@ -70,7 +69,7 @@ export class ProfileDataChangePage extends Block {
                     text: "Имя в чате",
                     name: "display_name",
                     type: "text",
-                    value: store.getState().display_name || "john_doe",
+                    value: "",
                     events: {
                         blur: (e: FocusEvent) => { validationCheck(e); }
                     },
@@ -81,7 +80,7 @@ export class ProfileDataChangePage extends Block {
                     text: "Телефон",
                     name: "phone",
                     type: "text",
-                    value: store.getState().phone || "",
+                    value: "",
                     events: {
                         blur: (e: FocusEvent) => { validationCheck(e); }
                     },

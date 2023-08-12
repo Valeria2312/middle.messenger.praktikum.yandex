@@ -11,7 +11,7 @@ interface chatModalProps {
   placeholder?: string
   type?: string
   nameBtn?: string
-  value?: number
+  value?: any
   events?: {
     submit?: (event: PointerEvent) => void
   }
@@ -39,6 +39,9 @@ export class chatModal extends Block {
                 }),
                 new Button({
                     name: this.props.nameBtn,
+                    events: {
+                        click: this.props.events.click
+                    }
                 }),
             ]
         });

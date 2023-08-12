@@ -2,7 +2,6 @@ import './chats.scss';
 import template from "./chats.hbs";
 import Block from '../../utilities/block';
 import {ChatItem} from "../../partials/chatItem/chatItem";
-// import {Chat} from "../../partials/chat/chat";
 import store, { connect } from '../../utilities/store';
 import { chatModal } from '../../partials/chatModal/chatModal';
 import { subMenuItem } from '../../partials/addUserInChat/addUserInChat';
@@ -10,66 +9,60 @@ import { handleFormSubmit } from '../../utilities/validation';
 import ChatAPI from '../../controllers/chat-api';
 import { InputContainer } from '../../partials/InputContainer/inputContainer';
 import { Button } from '../../partials/button/button';
-import { messageFrom } from '../../partials/messageFrom/messageFrom';
+import { messageTo } from '../../partials/MessageTo/MessageTo';
 
 interface ChatProps {}
 class ChatsPage extends Block {
-    private messageResult: any;
     constructor(props: ChatProps) {
         super('div',props);
         ChatAPI.getChats();
-        this.messageResult = [];
+
+        if (this.props.currentChat) {
+            this.setProps({chatId: this.props.currentChat!.id});
+            this.setProps({currentChat:this.props.currentChat});
+        }
     }
     updateChatItem() {
         const chats = this.props.chats;
         if (!chats) {
             return;
         }
-        const chatsResult: Array<Block> = [];
-        this.children.chatItems = chatsResult;
-        chats.forEach((item) => {
-            const chat = new ChatItem({
-                name: item.title,
-                content: item.avatar,
+
+        this.children.chatItems = chats.map((chat: any) => {
+            return new ChatItem({
+                name: chat.title,
+                content: chat.avatar,
                 time: '10:49',
-                count: item.unread_count,
+                count: chat.unread_count,
                 events: {
-                    click: async () => {
-                        ChatAPI.socketConnection(item.id);
-                        store.set("activeChat",item);
-                        this.setProps({currentChat: item});
-                        // console.log(item.id);
+                    click: (e) => {
+                        e.stopPropagation();
+                        e.preventDefault();
+
+                        store.getState().lastMessage = [];
+                        ChatAPI.socketConnection(chat.id);
+                        store.set("activeChat",chat);
+                        this.setProps({chatId: chat.id});
+                        this.setProps({currentChat: chat});
+                        ChatAPI.getChats();
                     }
                 }
             });
-            chatsResult.push(chat);
+
         });
-        return chatsResult;
     }
     updateCurrentMessage() {
-        // const messageResult:Array<Block> = [];
         const lastMessage = this.props.lastMessage;
         if (!lastMessage) {
             return;
         }
-        // this.children.activeChat = messageResult;
-        // if (!lastMessage) {
-        //     return;
-        // }
-        // console.log(this.messageResult);
-        // if(lastMessage) this.messageResult.push(lastMessage);
-        // // this.messageResult.push(lastMessage);
-        console.log("сообщения в функции",lastMessage.content);
-        const array = [];
-        array.push(lastMessage);
-        console.log(array);
-        // this.setProps({messages: [...array, lastMessage]});
-        // console.log("аррей сообщений",this.messageResult);
-        this.children.activeChat = new messageFrom({
-            text: lastMessage.content,
-            time: lastMessage.time
+        this.children.userMessages = lastMessage.map((message:any) => {
+
+            return new messageTo({
+                text: `${message.content}`,
+                time: `${message.time}`,
+            });
         });
-        // return chatsResult;
     }
     init() {
         this.children.modalAddChat = new chatModal({
@@ -81,12 +74,12 @@ class ChatsPage extends Block {
             events: {
                 submit: (e) => {
                     const chatData = handleFormSubmit(e);
-                    console.log(this.props.chats);
                     ChatAPI.createChat(chatData);
                     this.children.modalAddChat.hide();
                 }
             }
         });
+
         this.children.modaladdUserInChat = new chatModal({
             title: "Добавить пользователя",
             name: "login",
@@ -96,7 +89,7 @@ class ChatsPage extends Block {
             events: {
                 submit: (e) => {
                     let chatData = handleFormSubmit(e);
-                    chatData = Object.assign(chatData, { 'chatId': this.props.id });
+                    chatData = Object.assign(chatData, { 'chatId': this.props.chatId});
                     ChatAPI.addUsersToChat(chatData);
                     this.children.modaladdUserInChat.hide();
 
@@ -104,18 +97,17 @@ class ChatsPage extends Block {
             }
 
         });
+
         this.children.modalDeleteChat = new chatModal({
-            title: "Удалить чат",
+            title: "Удалить этот чат?",
             name: "chatId",
             type: "text",
-            placeholder: "Введите ID чата",
+            placeholder: "Введите id чата",
             nameBtn: "Удалить",
-            value: this.props.id,
             events: {
-                submit: (e) => {
-                    const chatData = handleFormSubmit(e);
-                    console.log(chatData);
-                    ChatAPI.deleteChat(chatData);
+                submit: () => {
+                    const chatData = this.props.chatId;
+                    ChatAPI.deleteChat(this.props.chatId);
                     this.children.modalDeleteChat.hide();
 
                 }
@@ -176,22 +168,13 @@ class ChatsPage extends Block {
             name: "message",
             type: 'text',
             value:"",
-            events: {
-                blur: () => {
-                    // const data = validationCheck(e);
-                    // console.log(data);
-                    // ChatAPI.sendMessage(e);
-                }
-            },
         }),
         this.children.button = new Button({
             class: "chat-pushNewMessage",
             events: {
                 click: () => {
                     const input = document.querySelector(".addMessage");
-                    // console.log('сработало условие',input?.value);
                     if (input!.value) {
-                        console.log("на не пустую строку");
                         ChatAPI.sendMessage(input!.value);
 
                     } else {
@@ -207,12 +190,8 @@ class ChatsPage extends Block {
     }
 }
 function mapStateToProps(state: any) {
-    // console.log(state.lastMessage);
     return [ state.chats,
         state.lastMessage] ?? [];
-
-    // } ?? {};
-    // return state.chats ?? [];
 }
 
 export default connect(mapStateToProps)(ChatsPage);

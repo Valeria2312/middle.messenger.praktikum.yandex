@@ -14,8 +14,10 @@ class ChatAPI {
     }
 
     async getChats() {
-        await this.ChatsAPI.getChats()
-            .then((res) => store.set('chats', res));
+        const chats = await this.ChatsAPI.getChats();
+        chats.sort();
+        store.set('chats', chats);
+        // .then((res) => store.set('chats', res));
         store.on('updated', () => {console.log('updated');});
     }
     async createChat(data: ICreateChat) {
@@ -24,8 +26,9 @@ class ChatAPI {
             .then(() => this.getChats());
     }
     async deleteChat(data: ICreateChat) {
+        data = {'chatId': data};
         await this.ChatsAPI.deleteChat(data)
-            .then((res) => console.log(res))
+        //     .then((res) => console.log(res))
             .then(() => this.getChats());
     }
     async addUsersToChat(data: any) {
@@ -55,19 +58,27 @@ class ChatAPI {
         this.getChats();
     }
 
-    socketConnection(data: number) {
-        this.getChatToken(data);
-        const chatId = data;
-        const userId = store.getState().user.id;
-        const token = localStorage.getItem("token");
-        const endpoint = `${userId}/${chatId}/${token}`;
-        this.socket = new chatWS(endpoint);
+    async socketConnection(data: number) {
+        try {
+            if (this.socket) {
+                this.socket.closeConnection();
+            }
+            const token = await this.ChatsAPI.getChatToken(data);
+            const chatId = data;
+            store.set("chatId", chatId);
 
-    }
-    async getChatToken(data: number) {
-        await this.ChatsAPI.getChatToken(data)
-        // .then((res) => console.log(res));
-            .then((res) => localStorage.setItem("token", res["token"]));
+            if (store.getState().chats) {
+                const currentChat = store.getState().chats.find((chat: any) => chat.id === chatId);
+                store.set("currentChat", currentChat);
+            }
+            const userId = store.getState().user.id;
+
+            const endpoint = `${userId}/${chatId}/${token.token}`;
+            this.socket = new chatWS(endpoint);
+        }
+        catch (error) {
+            console.log(error);
+        }
     }
     sendMessage(data: string) {
         this.socket.sendMessage(data);

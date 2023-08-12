@@ -1,17 +1,13 @@
 import AuthAPI from '../api/auth-api';
 import { TUser } from '../utilities/validation';
-import ChatAPI from './chat-api';
-// import router from '../utilities/router';
 import store from '../utilities/store';
 import router from '../utilities/router';
 
 //controllers
 class AuthApi {
     AuthAPI:AuthAPI;
-    // ChatAPI:ChatAPI;
     constructor() {
         this.AuthAPI = new AuthAPI;
-        // this.ChatAPI = new ChatAPI;
     }
     async singIn(data: TUser) {
         await this.AuthAPI.singIn(data)
@@ -24,8 +20,8 @@ class AuthApi {
     }
     async getUser() {
         await this.AuthAPI.getUser()
-            .then((res) => store.set('user', res))
-            .then(() => ChatAPI.getChats());
+            .then((res) => store.set('user', res));
+        // .then(() => ChatAPI.getChats());
         store.on('updated', () => {console.log('update');});
 
     }

@@ -10,12 +10,8 @@ class chatWS {
 
     addListeners() {
         this.socket.addEventListener('open', () => {
-            console.log('Соединение установлено');
-            //
-            // this.socket.send(JSON.stringify({
-            //     content: 'Моё первое сообщение миру!',
-            //     type: 'message',
-            // }));
+            this.GetOldMessages();
+
         });
         this.socket.addEventListener('close', event => {
             if (event.wasClean) {
@@ -24,29 +20,19 @@ class chatWS {
                 console.log('Обрыв соединения');
             }
             console.log(`Код: ${event.code} | Причина: ${event.reason}`);
-            console.log(event);
         });
 
         this.socket.addEventListener('message', event => {
-            const data = JSON.parse(event.data);
-            console.log(store.getState().lastMessage);
-            if (data && data.type !== "error" && data.type !== "pong" && data.type !== "user connected") {
+            try {
+                const data = JSON.parse(event.data);
 
-                if (Array.isArray(data)) {
-                    data.sort((a, b) => {
-                        return Date.parse(a.time) - Date.parse(b.time);
-                    });
+                if (data && data.type !== "error" && data.type !== "pong" && data.type !== "user connected") {
+                    const oldArr = store.getState().lastMessage ?? [];
+                    store.set('lastMessage', [...oldArr, data]);
                 }
-
-                if (Array.isArray(data)) {
-                    store.set('lastMessage', data);
-                } else {
-                    store.set('lastMessage', data);
-                }
+            } catch (error) {
+                console.log(error);
             }
-            // console.log('Получены данные', event.data);
-            // store.set('lastMessage', event.data);
-            // console.log('стор',store.getState());
         });
 
         this.socket.addEventListener('error', event => {
@@ -62,11 +48,16 @@ class chatWS {
         );
     }
     GetOldMessages() {
-        this.socket.send(JSON.stringify({
-            content: '0',
-            type: 'get old',
-        }));
-
+        this.socket.send(
+            JSON.stringify({
+                content: '0',
+                type: "message",
+            })
+        );
+    }
+    public closeConnection() {
+        console.log("соединение закрылось");
+        this.socket.close();
     }
 
 }
