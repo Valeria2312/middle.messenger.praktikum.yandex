@@ -44,11 +44,11 @@ window.addEventListener("DOMContentLoaded", () => {
     Router
         .use("/", login)
         .use("/login", login)
-        .use("/registration", registration)
+        .use("/sign-up", registration)
         .use("/error", error)
         .use("/profile", profile)
-        .use("/profileData", profileData)
-        .use("/profilePassword", profilePassword)
-        .use("/chat", chats)
+        .use("/settings", profileData)
+        .use("/settingsPassword", profilePassword)
+        .use("/messenger", chats)
         .start();
 });
