@@ -52,7 +52,7 @@ export class LoginPage extends Block {
                 }),
                 new Link({
                     title: 'Нет аккаунта?',
-                    href: '/registration',
+                    href: '/sign-up',
                     classLink: 'form-login__backlink',
                 }),
             ]
