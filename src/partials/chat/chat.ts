@@ -1,18 +1,11 @@
 import Block from "../../utilities/block";
 import template from "./chat.hbs";
-import { messageFrom } from '../messageFrom/messageFrom';
-import { messageTo } from '../MessageTo/MessageTo';
-import { InputContainer } from '../InputContainer/inputContainer';
-import { handleFormSubmit, validationCheck } from '../../utilities/validation';
-import { subMenuItem } from '../addUserInChat/addUserInChat';
+import { handleFormSubmit } from '../../utilities/validation';
+import { SubMenuItem } from '../addUserInChat/addUserInChat';
 import { chatModal } from '../chatModal/chatModal';
 import ChatAPI from '../../controllers/chat-api';
-import { Form } from '../form/form';
 import { Button } from '../button/button';
-import AuthApi from '../../controllers/auth-api';
-import ChatApi from '../../controllers/chat-api';
-import UserAPI from '../../controllers/user-api';
-import store, { connect } from '../../utilities/store';
+import store from '../../utilities/store';
 
 interface ChatProps {}
 
@@ -90,7 +83,7 @@ export class Chat extends Block {
             }
         });
 
-        this.children.addUserInChat = new subMenuItem({
+        this.children.addUserInChat = new SubMenuItem({
             text: "Добавить пользователя",
             events: {
                 click: () => {
@@ -98,7 +91,7 @@ export class Chat extends Block {
                 }
             }
         });
-        this.children.deleteChat = new subMenuItem({
+        this.children.deleteChat = new SubMenuItem({
             text: "Удалить чат",
             events: {
                 click: () => {
@@ -106,7 +99,7 @@ export class Chat extends Block {
                 }
             }
         });
-        this.children.deleteUser = new subMenuItem({
+        this.children.deleteUser = new SubMenuItem({
             text: "Удалить пользователя",
             events: {
                 click: () => {

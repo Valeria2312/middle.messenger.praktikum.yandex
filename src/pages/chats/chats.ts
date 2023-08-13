@@ -4,12 +4,12 @@ import Block from '../../utilities/block';
 import {ChatItem} from "../../partials/chatItem/chatItem";
 import store, { connect } from '../../utilities/store';
 import { chatModal } from '../../partials/chatModal/chatModal';
-import { subMenuItem } from '../../partials/addUserInChat/addUserInChat';
+import { SubMenuItem } from '../../partials/addUserInChat/addUserInChat';
 import { handleFormSubmit } from '../../utilities/validation';
 import ChatAPI from '../../controllers/chat-api';
 import { InputContainer } from '../../partials/InputContainer/inputContainer';
 import { Button } from '../../partials/button/button';
-import { messageTo } from '../../partials/MessageTo/MessageTo';
+import { MessageTo } from '../../partials/MessageTo/MessageTo';
 
 interface ChatProps {}
 class ChatsPage extends Block {
@@ -58,7 +58,7 @@ class ChatsPage extends Block {
         }
         this.children.userMessages = lastMessage.map((message:any) => {
 
-            return new messageTo({
+            return new MessageTo({
                 text: `${message.content}`,
                 time: `${message.time}`,
             });
@@ -129,7 +129,7 @@ class ChatsPage extends Block {
                 }
             }
         });
-        this.children.addChat = new subMenuItem({
+        this.children.addChat = new SubMenuItem({
             text: "Добавить чат",
             events: {
                 click:() => {
@@ -137,7 +137,7 @@ class ChatsPage extends Block {
                 }
             }
         });
-        this.children.addUserInChat = new subMenuItem({
+        this.children.addUserInChat = new SubMenuItem({
             text: "Добавить пользователя",
             events: {
                 click: () => {
@@ -145,7 +145,7 @@ class ChatsPage extends Block {
                 }
             }
         });
-        this.children.deleteChat = new subMenuItem({
+        this.children.deleteChat = new SubMenuItem({
             text: "Удалить чат",
             events: {
                 click: () => {
@@ -153,7 +153,7 @@ class ChatsPage extends Block {
                 }
             }
         });
-        this.children.deleteUser = new subMenuItem({
+        this.children.deleteUser = new SubMenuItem({
             text: "Удалить пользователя",
             events: {
                 click: () => {

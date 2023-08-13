@@ -7,7 +7,7 @@ interface LinkProps {
     classLink?: string;
     classDiv?: string;
     events?: {
-      click?: (event: any) => void;
+      click?: (event: Event) => void;
   }
 }
 

@@ -5,7 +5,7 @@ import { Form } from '../form/form';
 import { InputContainer } from '../InputContainer/inputContainer';
 import { validationCheck } from '../../utilities/validation';
 
-interface chatModalProps {
+interface ChatModalProps {
   name?: string
   title?: string
   placeholder?: string
@@ -18,7 +18,7 @@ interface chatModalProps {
 }
 
 export class chatModal extends Block {
-    constructor(props: chatModalProps) {
+    constructor(props: ChatModalProps) {
         super("div", props);
     }
     init() {

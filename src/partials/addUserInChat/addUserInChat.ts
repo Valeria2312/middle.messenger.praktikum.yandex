@@ -1,15 +1,15 @@
 import Block from '../../utilities/block';
 import template from './addUserInChat.hbs';
 
-interface subMenuItemProps {
+interface SubMenuItemProps {
   text?: string
   events?: {
-    click?: (event: any) => void
+    click?: (event: Event) => void
   }
 }
 
-export class subMenuItem extends Block {
-    constructor(props: subMenuItemProps) {
+export class SubMenuItem extends Block {
+    constructor(props: SubMenuItemProps) {
         super("div", props);
     }
     addEvents() {

@@ -1,13 +1,13 @@
 import Block from "../../utilities/block";
 import template from "./messageFrom.hbs";
 
-interface messageFromProps {
+interface MessageFromProps {
     text?: string,
     time?: string,
 }
 
-export class messageFrom extends Block {
-    constructor(props: messageFromProps) {
+export class MessageFrom extends Block {
+    constructor(props: MessageFromProps) {
         super('div',props);
     }
 

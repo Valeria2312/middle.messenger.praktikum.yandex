@@ -5,7 +5,7 @@ interface AvatarProps {
   srcImage?: string
   name?: string
   events?: {
-    click?: (event: any) => void
+    click?: (event: Event) => void
   }
 }
 

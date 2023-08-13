@@ -2,13 +2,13 @@ import Block from "../../utilities/block";
 import template from "./MessageTo.hbs";
 import { Button } from '../button/button';
 
-interface messageToProps {
+interface MessageToProps {
     text: string,
     time: string,
 }
 
-export class messageTo extends Block {
-    constructor(props: messageToProps) {
+export class MessageTo extends Block {
+    constructor(props: MessageToProps) {
         super('div',props);
     }
     init() {

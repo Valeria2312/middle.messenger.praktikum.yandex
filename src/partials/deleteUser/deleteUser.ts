@@ -1,14 +1,14 @@
 import Block from '../../utilities/block';
 import template from './deleteUser.hbs';
 
-interface deleteUserProps {
+interface DeleteUserProps {
   events?: {
     click?: (event: any) => void
   }
 }
 
-export class deleteUser extends Block {
-    constructor(props: deleteUserProps) {
+export class DeleteUser extends Block {
+    constructor(props: DeleteUserProps) {
         super("div", props);
     }
     addEvents() {

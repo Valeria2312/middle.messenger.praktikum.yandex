@@ -17,7 +17,7 @@ interface ModalProps {
   addChat?: boolean
   deleteChat?: boolean
   events?: {
-    click?: (event: any) => void
+    click?: (event: Event) => void
   }
 }
 
