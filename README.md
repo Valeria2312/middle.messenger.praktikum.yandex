@@ -22,7 +22,7 @@
 4. Запустите стабильную версию с сервером`npm run start`
 
 ## Ссылка
-"Яндекс.Мессенджер" (https://deploy-preview-3--zesty-dieffenbachia-b94244.netlify.app/)
+"Яндекс.Мессенджер" (https://deploy-preview-4--zesty-dieffenbachia-b94244.netlify.app/)
 
 ## Статус
 В разработке
