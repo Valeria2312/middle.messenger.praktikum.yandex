@@ -3,17 +3,14 @@ import template from './modal.hbs';
 import Block from '../../utilities/block';
 import { Button } from '../button/button';
 import UserAPI from '../../controllers/user-api';
-// import { Form } from '../form/form';
-// import { handleFormSubmit, validationCheck } from '../../utilities/validation';
-// import { InputContainer } from '../InputContainer/inputContainer';
-// import ChatAPI from '../../controllers/chat-api';
+import { Close } from '../Close/Close';
+import close
+    from '../chatModal/image/free-icon-close-cross-in-circular-outlined-interface-button-58253.png';
 
 interface ModalProps {
   srcImage?: string
   name?: string
   title?: string
-  // input?: InputContainer,
-  // btn?: Button,
   addChat?: boolean
   deleteChat?: boolean
   events?: {
@@ -26,6 +23,16 @@ export class Modal extends Block {
         super("div", props);
     }
     init() {
+        this.children.close = new Close({
+            src: close,
+            alt: "close",
+            class: "close",
+            events: {
+                click: () => {
+                    this.hide();
+                }
+            }
+        });
         this.children.button = new Button({
             name: "Сохранить",
             events: {

@@ -4,6 +4,8 @@ import { Button } from '../button/button';
 import { Form } from '../form/form';
 import { InputContainer } from '../InputContainer/inputContainer';
 import { validationCheck } from '../../utilities/validation';
+import close from './image/free-icon-close-cross-in-circular-outlined-interface-button-58253.png';
+import { Close } from '../Close/Close';
 
 interface ChatModalProps {
   name?: string
@@ -22,6 +24,16 @@ export class chatModal extends Block {
         super("div", props);
     }
     init() {
+        this.children.close = new Close({
+            src: close,
+            alt: "close",
+            class: "close",
+            events: {
+                click: () => {
+                    this.hide();
+                }
+            }
+        });
         this.children.form = new Form({
             formClass: 'form-login',
             children: [
