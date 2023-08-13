@@ -293,22 +293,22 @@
     margin-bottom: 10px;
   }
 
-  &-addFile {
-    width: 32px;
-    height: 32px;
-    background: url('./image/Group 197.svg') center center no-repeat;
-
-    font-size: 1.25em;
-    font-weight: 700;
-    color: white;
-    cursor: pointer;
-    display: inline-block;
-    &:focus + label,
-    & label:hover {
-      background-color: red;
-      cursor: pointer;
-    }
-  }
+  //&-addFile {
+  //  width: 32px;
+  //  height: 32px;
+  //  background: url('./image/Group 197.svg') center center no-repeat;
+  //
+  //  font-size: 1.25em;
+  //  font-weight: 700;
+  //  color: white;
+  //  cursor: pointer;
+  //  display: inline-block;
+  //  &:focus + label,
+  //  & label:hover {
+  //    background-color: red;
+  //    cursor: pointer;
+  //  }
+  //}
 
 
   &-pushNewMessage {
@@ -319,7 +319,6 @@
   }
 }
 .addFile {
-  //display: none;
   width: 0.1px;
   height: 0.1px;
   opacity: 0;
@@ -332,10 +331,11 @@
   flex-direction: row-reverse;
 }
 .inputMessage {
-    width: calc(1426px - 66px);
+    max-width: calc(1426px - 66px);
     display: flex;
 }
 .formSendMessage {
   display: flex;
   align-items: flex-end;
 }
+//.chat-newMessage:first-child{width: 100%}

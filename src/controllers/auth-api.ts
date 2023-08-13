@@ -14,7 +14,7 @@ class AuthApi {
             await this.AuthAPI.singIn(data)
                 .then(() => this.getUser())
             // .then(() => this.ChatAPI.getChats())
-                .finally(() => router.go("/chat"));
+                .finally(() => router.go("/messenger"));
         }
         catch (error) {
             console.log(error);
