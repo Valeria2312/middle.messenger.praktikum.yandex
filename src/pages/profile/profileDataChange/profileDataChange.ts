@@ -10,8 +10,7 @@ class ProfileDataChangePage extends Block {
     constructor() {
         super();
     }
-    init() {
-        super.init();
+    UpdateDataUser() {
         this.children.form = new Form({
             formClass:'form-dataChange',
             events: {
@@ -26,7 +25,7 @@ class ProfileDataChangePage extends Block {
                     text: "Почта",
                     name: "email",
                     type: "email",
-                    value:"",
+                    value:this.props.user?.email || "",
                     events: {
                         blur: (e: FocusEvent) => { validationCheck(e); }
                     },
@@ -36,7 +35,7 @@ class ProfileDataChangePage extends Block {
                     text: "Логин",
                     name: "login",
                     type: "text",
-                    value: "",
+                    value: this.props.user?.login || "",
                     events: {
                         blur: (e: FocusEvent) => { validationCheck(e); }
                     },
@@ -47,7 +46,7 @@ class ProfileDataChangePage extends Block {
                     text: "Имя",
                     name: "first_name",
                     type: "text",
-                    value: "",
+                    value: this.props.user?.first_name || "",
                     events: {
                         blur: (e: FocusEvent) => { validationCheck(e); }
                     },
@@ -58,7 +57,7 @@ class ProfileDataChangePage extends Block {
                     text: "Фамилия",
                     name: "second_name",
                     type: "text",
-                    value:'',
+                    value:this.props.user?.second_name || "",
                     events: {
                         blur: (e: FocusEvent) => { validationCheck(e); }
                     },
@@ -69,7 +68,7 @@ class ProfileDataChangePage extends Block {
                     text: "Имя в чате",
                     name: "display_name",
                     type: "text",
-                    value: "",
+                    value: this.props.user?.display_name || "",
                     events: {
                         blur: (e: FocusEvent) => { validationCheck(e); }
                     },
@@ -80,18 +79,26 @@ class ProfileDataChangePage extends Block {
                     text: "Телефон",
                     name: "phone",
                     type: "text",
-                    value: "",
+                    value: this.props.user?.phone || "",
                     events: {
                         blur: (e: FocusEvent) => { validationCheck(e); }
                     },
                 }),
                 new Button({
                     name:'Сохранить',
+                    events: {
+                        click: () => {}
+                    }
                 }),
             ],
         });
     }
+    init() {
+        super.init();
+
+    }
     render() {
+        this.UpdateDataUser();
         return this.compile(template, this.props);
     }
 }

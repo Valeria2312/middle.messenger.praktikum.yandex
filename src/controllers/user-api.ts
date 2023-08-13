@@ -14,7 +14,7 @@ class UserAPI {
         try {
             await this.UserAPI.changeProfile(data)
                 .then(() => AuthApi.getUser())
-                .then(() => router.go("/profile"));
+                .then(() => router.go("/settings"));
         }
         catch (error) {
             console.log(error);
@@ -24,7 +24,7 @@ class UserAPI {
     async Password(data: TUser) {
         try {
             await this.UserAPI.changePassword(data)
-                .then(() => router.go("/profile"));
+                .then(() => router.go("/settings"));
         }
         catch (error) {
             console.log(error);

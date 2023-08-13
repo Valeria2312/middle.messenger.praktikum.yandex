@@ -105,7 +105,7 @@ class ProfilePage extends Block {
                     title: "Изменить данные",
                 }),
                 new Link({
-                    href: "/profilePassword",
+                    href: "/settingsPassword",
                     classLink: "form-info-title-link",
                     title: "Изменить пароль",
                 }),

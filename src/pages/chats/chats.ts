@@ -31,7 +31,6 @@ class ChatsPage extends Block {
         this.children.chatItems = chats.map((chat: any) => {
             return new ChatItem({
                 name: chat.title,
-                // content: chat.avatar,
                 class: "chat__info-avatar",
                 srcImage: chat.avatar,
                 time: '10:49',
