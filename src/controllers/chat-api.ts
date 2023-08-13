@@ -14,48 +14,78 @@ class ChatAPI {
     }
 
     async getChats() {
-        const chats = await this.ChatsAPI.getChats();
-        chats.sort();
-        store.set('chats', chats);
-        // .then((res) => store.set('chats', res));
-        store.on('updated', () => {console.log('updated');});
+        try {
+            const chats = await this.ChatsAPI.getChats();
+            chats.sort();
+            store.set('chats', chats);
+            // .then((res) => store.set('chats', res));
+            store.on('updated', () => {
+                console.log('updated');
+            });
+        }
+        catch (error) {
+            console.log(error);
+        }
     }
     async createChat(data: ICreateChat) {
-        await this.ChatsAPI.createChat(data)
-            .then((res) => console.log(res))
-            .then(() => this.getChats());
+        try {
+            await this.ChatsAPI.createChat(data)
+                .then((res) => console.log(res))
+                .then(() => this.getChats());
+        }
+        catch (error) {
+            console.log(error);
+        }
     }
     async deleteChat(data: ICreateChat) {
-        data = {'chatId': data};
-        await this.ChatsAPI.deleteChat(data)
-        //     .then((res) => console.log(res))
-            .then(() => this.getChats());
+        try {
+            data = {'chatId': data};
+            await this.ChatsAPI.deleteChat(data)
+            //     .then((res) => console.log(res))
+                .then(() => this.getChats());
+        }
+        catch (error) {
+            console.log(error);
+        }
+
     }
     async addUsersToChat(data: any) {
-        const { login, chatId } = data;
-        const dataUser = await this.UserAPI.searchUser({login: login});
-        const requestDataUser = {
-            "users": [
-                dataUser[0].id
-            ],
-            chatId
-        };
-        await this.ChatsAPI.addUsers(requestDataUser)
-            .then((res) => console.log(res));
-        this.getChats();
+        try {
+            const { login, chatId } = data;
+            const dataUser = await this.UserAPI.searchUser({login: login});
+            const requestDataUser = {
+                "users": [
+                    dataUser[0].id
+                ],
+                chatId
+            };
+            await this.ChatsAPI.addUsers(requestDataUser)
+                .then((res) => console.log(res));
+            this.getChats();
+        }
+        catch (error) {
+            console.log(error);
+        }
+
     }
     async deleteUsers(data: IAddUsersInChat) {
-        const { login, chatId } = data;
-        const dataUser = await this.UserAPI.searchUser({login: login});
-        const requestDataUser = {
-            "users": [
-                dataUser[0].id
-            ],
-            chatId
-        };
-        await this.ChatsAPI.deleteUsers(requestDataUser)
-            .then((res) => console.log(res));
-        this.getChats();
+        try {
+            const { login, chatId } = data;
+            const dataUser = await this.UserAPI.searchUser({login: login});
+            const requestDataUser = {
+                "users": [
+                    dataUser[0].id
+                ],
+                chatId
+            };
+            await this.ChatsAPI.deleteUsers(requestDataUser)
+                .then((res) => console.log(res));
+            this.getChats();
+        }
+        catch (error) {
+            console.log(error);
+        }
+
     }
 
     async socketConnection(data: number) {
@@ -80,6 +110,8 @@ class ChatAPI {
             console.log(error);
         }
     }
+
+
     sendMessage(data: string) {
         this.socket.sendMessage(data);
     }

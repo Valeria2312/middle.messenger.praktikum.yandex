@@ -10,18 +10,35 @@ class UserAPI {
         this.UserAPI = new UserApi;
     }
     async changeProfile(data: TUser) {
-        await this.UserAPI.changeProfile(data)
-            .then(() => AuthApi.getUser())
-            .then(() => router.go("/profile"));
+        try {
+            await this.UserAPI.changeProfile(data)
+                .then(() => AuthApi.getUser())
+                .then(() => router.go("/profile"));
+        }
+        catch (error) {
+            console.log(error);
+        }
+
     }
     async Password(data: TUser) {
-        await this.UserAPI.changePassword(data)
-            .then(() => router.go("/profile"));
+        try {
+            await this.UserAPI.changePassword(data)
+                .then(() => router.go("/profile"));
+        }
+        catch (error) {
+            console.log(error);
+        }
+
     }
     async changeAvatar(data: any) {
-        await this.UserAPI.setAvatar(data)
+        try {
+            await this.UserAPI.setAvatar(data)
             // .then((res) => console.log(res))
-            .then(() => AuthApi.getUser());
+                .then(() => AuthApi.getUser());
+        }
+        catch (error) {
+            console.log(error);
+        }
     }
 }
 export default new UserAPI();

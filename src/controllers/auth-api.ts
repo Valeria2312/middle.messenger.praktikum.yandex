@@ -10,25 +10,45 @@ class AuthApi {
         this.AuthAPI = new AuthAPI;
     }
     async singIn(data: TUser) {
-        await this.AuthAPI.singIn(data)
-            .then(() => this.getUser())
+        try {
+            await this.AuthAPI.singIn(data)
+                .then(() => this.getUser())
             // .then(() => this.ChatAPI.getChats())
-            .finally(() => router.go("/chat"));
+                .finally(() => router.go("/chat"));
+        }
+        catch (error) {
+            console.log(error);
+        }
     }
     async singUp(data: TUser) {
-        await this.AuthAPI.singUp(data);
+        try {
+            await this.AuthAPI.singUp(data);
+        }
+        catch (error) {
+            console.log(error);
+        }
+
     }
     async getUser() {
-        await this.AuthAPI.getUser()
-            .then((res) => store.set('user', res));
-        // .then(() => ChatAPI.getChats());
-        store.on('updated', () => {console.log('update');});
-
+        try {
+            await this.AuthAPI.getUser()
+                .then((res) => store.set('user', res));
+            // .then(() => ChatAPI.getChats());
+            store.on('updated', () => {console.log('update');});
+        }
+        catch (error) {
+            console.log(error);
+        }
     }
 
     async logout() {
-        await this.AuthAPI.logout()
-            .then(() => router.go("/login"));
+        try {
+            await this.AuthAPI.logout()
+                .then(() => router.go("/login"));
+        }
+        catch (error) {
+            console.log(error);
+        }
     }
 }
 export default new AuthApi();
