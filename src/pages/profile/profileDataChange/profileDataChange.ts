@@ -5,8 +5,8 @@ import {Button} from "../../../partials/button/button";
 import { handleFormSubmit, validationCheck } from '../../../utilities/validation';
 import { InputContainer } from '../../../partials/InputContainer/inputContainer';
 import UserAPI from '../../../controllers/user-api';
-
-export class ProfileDataChangePage extends Block {
+import { connect } from '../../../utilities/store';
+class ProfileDataChangePage extends Block {
     constructor() {
         super();
     }
@@ -95,3 +95,9 @@ export class ProfileDataChangePage extends Block {
         return this.compile(template, this.props);
     }
 }
+
+function mapStateToProps(state: any) {
+    return state.user ?? [];
+}
+
+export default connect(mapStateToProps)(ProfileDataChangePage);

@@ -9,6 +9,9 @@ import { Avatar } from '../../partials/avatar/avatar';
 import { Modal } from '../../partials/modal/modal';
 import AuthApi from '../../controllers/auth-api';
 import { Button } from '../../partials/button/button';
+import { handleFormSubmit } from '../../utilities/validation';
+import ChatAPI from '../../controllers/chat-api';
+import UserAPI from '../../controllers/user-api';
 
 
 interface ProfileProps {}
@@ -18,9 +21,15 @@ class ProfilePage extends Block {
         AuthApi.getUser();
     }
     updateUser() {
+        const user = this.props.user;
+        console.log(user);
+        if (!user) {
+            return;
+        }
         this.children.avatar = new Avatar({
-            name: store.getState().user?.display_name,
-            srcImage:`https://ya-praktikum.tech/api/v2/resources${store.getState().user?.avatar}`,
+            name: this.props.user?.display_name || "",
+            srcImage:`https://ya-praktikum.tech/api/v2/resources/${this.props.user?.avatar}`,
+            class: "profile__info-avatar",
             events: {
                 click: () => {
                     this.children.modal.show();
@@ -28,8 +37,12 @@ class ProfilePage extends Block {
             }
         });
         this.children.modal = new Modal({
+            // title: "Загрузите файл",
             title: "Загрузите файл",
-
+            name: "file",
+            type: "file",
+            placeholder: "Выберите файл",
+            nameBtn: "Сохранить",
         });
         this.children.form = new Form({
             formClass:'form-info',
@@ -39,7 +52,7 @@ class ProfilePage extends Block {
                     text: "Почта",
                     name: "email",
                     type: "email",
-                    value: store.getState().user?.email,
+                    value: this.props.user?.email || "",
                     readonly: true,
                 }),
                 new InputContainer({
@@ -47,7 +60,7 @@ class ProfilePage extends Block {
                     text: "Логин",
                     name: "login",
                     type: "text",
-                    value: store.getState().user?.login,
+                    value: this.props.user?.login || "",
                     readonly: true,
                 }),
 
@@ -56,7 +69,7 @@ class ProfilePage extends Block {
                     text: "Имя",
                     name: "first_name",
                     type: "text",
-                    value: store.getState().user?.first_name,
+                    value: this.props.user?.first_name || "",
                     readonly: true,
                 }),
 
@@ -65,7 +78,7 @@ class ProfilePage extends Block {
                     text: "Фамилия",
                     name: "second_name",
                     type: "text",
-                    value: store.getState().user?.second_name,
+                    value: this.props.user?.second_name || "",
                     readonly: true,
                 }),
 
@@ -74,7 +87,7 @@ class ProfilePage extends Block {
                     text: "Имя в чате",
                     name: "chat_name",
                     type: "text",
-                    value: store.getState().user?.display_name || "",
+                    value: this.props.user?.display_name || "",
                     readonly: true,
                 }),
 
@@ -83,11 +96,11 @@ class ProfilePage extends Block {
                     text: "Телефон",
                     name: "phone",
                     type: "text",
-                    value: store.getState().user?.phone,
+                    value: this.props.user?.phone || "",
                     readonly: true,
                 }),
                 new Link({
-                    href: "/profileData",
+                    href: "/settingsData",
                     classLink: "form-info-title-link",
                     title: "Изменить данные",
                 }),
@@ -107,10 +120,12 @@ class ProfilePage extends Block {
             },
         });
     }
-    init() {
-    }
+    // init() {
+    //     console.log(this.props.user?.avatar);
+    // }
     render() {
         this.updateUser();
+        console.log("в рендере",this.props);
         return this.compile(template, this.props);
     }
 }

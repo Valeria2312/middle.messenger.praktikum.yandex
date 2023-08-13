@@ -23,7 +23,7 @@ import {LoginPage} from "./pages/login/login";
 import {RegistrationPage} from './pages/registration/registration';
 import {ErrorPage} from "./pages/error/error";
 import ProfilePage from "./pages/profile/profile";
-import {ProfileDataChangePage} from './pages/profile/profileDataChange/profileDataChange';
+import ProfileDataChangePage from './pages/profile/profileDataChange/profileDataChange';
 import {ProfilePasswordChangePage} from './pages/profile/profilePasswordChange/profilePasswordChange';
 import ChatsPage from "./pages/chats/chats";
 import Router from './utilities/router';
@@ -32,7 +32,7 @@ const login = new LoginPage();
 const registration = new RegistrationPage();
 const error = new ErrorPage();
 const profile = new ProfilePage({title: 'pf'});
-const profileData = new ProfileDataChangePage();
+const profileData = new ProfileDataChangePage({title: 'pf'});
 const profilePassword = new ProfilePasswordChangePage();
 const chats = new ChatsPage({title: 'pf'});
 
@@ -46,8 +46,8 @@ window.addEventListener("DOMContentLoaded", () => {
         .use("/login", login)
         .use("/sign-up", registration)
         .use("/error", error)
-        .use("/profile", profile)
-        .use("/settings", profileData)
+        .use("/settings", profile)
+        .use("/settingsData", profileData)
         .use("/settingsPassword", profilePassword)
         .use("/messenger", chats)
         .start();

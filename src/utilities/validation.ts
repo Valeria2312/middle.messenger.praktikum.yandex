@@ -31,7 +31,7 @@ const validDataInputs: Record<string, validInput> = {
         errorMessage:'Логин от 3 до 20 символов, латиницей, может содержать цифры',
     },
     title: {
-        RegExp: /^$/,
+        RegExp: /^[а-яА-ЯёЁa-zA-Z0-9]+$/,
         errorMessage:'Введите название чата',
     },
     chatId: {

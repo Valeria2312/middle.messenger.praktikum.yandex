@@ -31,7 +31,9 @@ class ChatsPage extends Block {
         this.children.chatItems = chats.map((chat: any) => {
             return new ChatItem({
                 name: chat.title,
-                content: chat.avatar,
+                // content: chat.avatar,
+                class: "chat__info-avatar",
+                srcImage: chat.avatar,
                 time: '10:49',
                 count: chat.unread_count,
                 events: {
@@ -73,7 +75,9 @@ class ChatsPage extends Block {
             nameBtn: "Сохранить",
             events: {
                 submit: (e) => {
+                    console.log(e);
                     const chatData = handleFormSubmit(e);
+                    console.log(chatData);
                     ChatAPI.createChat(chatData);
                     this.children.modalAddChat.hide();
                 }
@@ -97,7 +101,6 @@ class ChatsPage extends Block {
             }
 
         });
-
         this.children.modalDeleteChat = new chatModal({
             title: "Удалить этот чат?",
             name: "chatId",

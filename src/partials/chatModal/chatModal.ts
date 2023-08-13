@@ -15,9 +15,50 @@ interface ChatModalProps {
   nameBtn?: string
   value?: any
   events?: {
-    submit?: (event: PointerEvent) => void
+    submit?: (event: Event) => void
   }
 }
+
+// export class chatModal extends Block {
+//     constructor(props: ChatModalProps) {
+//         super("div", props);
+//     }
+//     init() {
+//         this.children.close = new Close({
+//             src: close,
+//             alt: "close",
+//             class: "close",
+//             events: {
+//                 click: () => {
+//                     this.hide();
+//                 }
+//             }
+//         });
+//         this.children.form = new Form({
+//             formClass: 'form-login',
+//             children: [
+//                 new InputContainer({
+//                     class: 'form-input',
+//                     name:this.props.name,
+//                     type: this.props.type,
+//                     placeholder: this.props.placeholder,
+//                     value: this.props.value || '',
+//                     events: {
+//                         blur: (e: FocusEvent) => {
+//                             validationCheck(e);
+//                         }
+//                     },
+//                 }),
+//                 new Button({
+//                     name: this.props.nameBtn,
+//                 }),
+//             ]
+//         });
+//     }
+//
+//     render() { return this.compile(template, this.props);
+//     }
+// }
 
 export class chatModal extends Block {
     constructor(props: ChatModalProps) {
@@ -58,7 +99,7 @@ export class chatModal extends Block {
             ]
         });
     }
-
     render() { return this.compile(template, this.props);
     }
 }
+

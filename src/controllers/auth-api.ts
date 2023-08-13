@@ -35,6 +35,7 @@ class AuthApi {
                 .then((res) => store.set('user', res));
             // .then(() => ChatAPI.getChats());
             store.on('updated', () => {console.log('update');});
+            console.log("новый юзер в сторе", store.getState().user);
         }
         catch (error) {
             console.log(error);

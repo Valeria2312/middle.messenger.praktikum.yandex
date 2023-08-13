@@ -62,9 +62,9 @@ export function connect(mapStateToProps: any) {
                     // при обновлении получаем новое состояние
                     const newState = mapStateToProps(store.getState());
                     // если что-то из используемых данных поменялось, обновляем компонент
-                    if (!isEqual(state, newState)) {
-                        this.setProps(store.getState());
-                    }
+                    // if (!isEqual(state, newState)) {
+                    this.setProps(store.getState());
+                    // }
                     // не забываем сохранить новое состояние
                     state = newState;
                 });

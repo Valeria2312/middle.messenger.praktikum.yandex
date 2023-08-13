@@ -2,6 +2,7 @@ import { TUser } from '../utilities/validation';
 import UserApi from '../api/user-api';
 import router from '../utilities/router';
 import AuthApi from './auth-api';
+import store from '../utilities/store';
 
 //controllers
 class UserAPI {
@@ -33,8 +34,9 @@ class UserAPI {
     async changeAvatar(data: any) {
         try {
             await this.UserAPI.setAvatar(data)
-            // .then((res) => console.log(res))
                 .then(() => AuthApi.getUser());
+            console.log("аваьар сменился");
+            store.on('updated', () => {console.log('update');});
         }
         catch (error) {
             console.log(error);

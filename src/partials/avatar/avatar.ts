@@ -1,9 +1,11 @@
 import template from './avatar.hbs';
 import Block from '../../utilities/block';
+import './avatar.scss';
 
 interface AvatarProps {
   srcImage?: string
   name?: string
+  class?: string
   events?: {
     click?: (event: Event) => void
   }
