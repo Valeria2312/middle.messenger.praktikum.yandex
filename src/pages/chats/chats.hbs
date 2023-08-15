@@ -1,17 +1,67 @@
 <main class='chats'>
     <section class="list-chats">
-        <div class="link-profile">
-            <a href="/profile" class="link-profile__link">Профиль</a>
-            <img class="link-profile__img" src="../../pages/chats/image/Polygon%201.svg" alt="Переход на профиль">
+        <div class="menu-chats">
+            <div class="chat-menu">
+                <div class="chat-menu-points">
+                </div>
+                <div class="submenu_addChat">
+                    {{{addChat}}}
+                </div>
+            </div>
+            <div class="link-profile">
+                <a href="/settings" class="link-profile__link">Профиль</a>
+                <img class="link-profile__img" src="../../pages/chats/image/Polygon%201.svg" alt="Переход на профиль">
+            </div>
         </div>
         <label>
             <input class="list-chats__search" type="text" placeholder='Поиск'>
         </label>
         <div class="list-chats__items">
-            {{{chatItem}}}
+            {{{chatItems}}}
         </div>
     </section>
+{{#if chatId}}
     <section class="chat-openItem">
-        {{{chat}}}
+        <div class="chat">
+            <div class="chat-title">
+                    <div class="chat-people">
+                        <div class="chat-people__img">
+                                <img class="chat__header-avatar-img" src="https://ya-praktikum.tech/api/v2/resources{{currentChat.avatar}}" alt="Аватар">
+                        </div>
+
+                        <h2 class="chat-people__name">{{{currentChat.title}}}</h2>
+                    </div>
+                <div class="chat-menu">
+                    <div class="chat-menu-points">
+                    </div>
+                    <div class="submenu">
+                        {{{addUserInChat}}}
+                        {{{deleteChat}}}
+                        {{{deleteUser}}}
+                    </div>
+                </div>
+            </div>
+            <div class="chat-main">
+    {{#if chatId}}
+                <div class="chat__content">
+                    {{#each userMessages}}
+                        {{{this}}}
+                    {{/each}}
+                </div>
+    {{/if}}
+            </div>
+            <div class="chat-newMessage">
+                {{{inputFile}}}
+                {{{inputMessage}}}
+                {{{button}}}
+            </div>
+            {{{modaladdUserInChat}}}
+            {{{modalDeleteChat}}}
+            {{{modalDeleteUser}}}
+        </div>
     </section>
+    {{else}}
+        <div class="chat__message-nothing">Выберите чат чтобы отправить сообщение</div>
+    {{/if}}
+    {{{modalAddChat}}}
 </main>

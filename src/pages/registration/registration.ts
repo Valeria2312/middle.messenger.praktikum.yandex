@@ -6,6 +6,8 @@ import { InputContainer } from '../../partials/InputContainer/inputContainer';
 import { Form } from '../../partials/form/form';
 import { handleFormSubmit, validationCheck } from '../../utilities/validation';
 import { Link } from '../../partials/link/link';
+import AuthApi from '../../controllers/auth-api';
+import router from '../../utilities/router';
 
 export class RegistrationPage extends Block {
     constructor() {
@@ -17,7 +19,16 @@ export class RegistrationPage extends Block {
         this.children.form = new Form({
             formClass: 'form-registration',
             events: {
-                submit: (e) => { handleFormSubmit(e); },
+                submit: (e) => {
+                    e.preventDefault();
+                    const signupData = handleFormSubmit(e);
+                    if(signupData) {
+                        AuthApi.singUp(signupData)
+                            .then(res =>console.log(res));
+                        router.go("/profile");
+
+                    }
+                },
             },
             children: [
                 new InputContainer({
@@ -75,7 +86,7 @@ export class RegistrationPage extends Block {
                     },
                 }),
                 new InputContainer({
-                    name: 'repeatPassword',
+                    name: 'password',
                     type: 'text',
                     class: 'form-input',
                     text: 'Пароль (еще раз)',

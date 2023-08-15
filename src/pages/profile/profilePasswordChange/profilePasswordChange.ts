@@ -4,6 +4,7 @@ import {Form} from "../../../partials/form/form";
 import {Button} from "../../../partials/button/button";
 import { InputContainer } from '../../../partials/InputContainer/inputContainer';
 import { handleFormSubmit, validationCheck } from '../../../utilities/validation';
+import UserAPI from '../../../controllers/user-api';
 
 export class ProfilePasswordChangePage extends Block {
     constructor() {
@@ -13,7 +14,10 @@ export class ProfilePasswordChangePage extends Block {
         this.children.form = new Form({
             formClass:'form-passwordChange',
             events: {
-                submit: (e) => { handleFormSubmit(e); },
+                submit: (e) => {const changePassword = handleFormSubmit(e);
+                    if(changePassword)
+                        UserAPI.changePassword(changePassword);
+                },
             },
             children: [
                 new InputContainer({
@@ -21,22 +25,20 @@ export class ProfilePasswordChangePage extends Block {
                     class:'form-input',
                     name: "oldPassword",
                     type: "password",
-                    value: '•••••••••',
+                    value: '',
                     events: {
                         blur: (e: FocusEvent) => { validationCheck(e); }
                     },
-                    // readonly: true,
                 }),
                 new InputContainer({
                     text: "Новый пароль",
                     class:'form-input',
                     name: "newPassword",
                     type: "password",
-                    value: '•••••••••',
+                    value: '',
                     events: {
                         blur: (e: FocusEvent) => { validationCheck(e); }
                     },
-                    // readonly: true,
                 }),
 
                 new InputContainer({
@@ -44,11 +46,10 @@ export class ProfilePasswordChangePage extends Block {
                     class:'form-input',
                     name: "repeatPassword",
                     type: "password",
-                    value: '•••••••••',
+                    value: '',
                     events: {
                         blur: (e: FocusEvent) => { validationCheck(e); }
                     },
-                    // readonly: true,
                 }),
 
                 new Button({

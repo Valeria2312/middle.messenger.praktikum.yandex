@@ -6,13 +6,25 @@ interface LinkProps {
     href?: string;
     classLink?: string;
     classDiv?: string;
+    events?: {
+      click?: (event: Event) => void;
+  }
 }
 
 export class Link extends Block {
     constructor(props: LinkProps) {
         super('div',props);
     }
-
+    addEvents() {
+        const child = this._element?.querySelector('a');
+        // console.log(child);
+        if(!child) {
+            return;
+        }
+        const { events = {} } = this.props;
+        for (const i in events)
+            child.addEventListener(i, events[i]);
+    }
     render() {
         return this.compile(template, this.props);
     }

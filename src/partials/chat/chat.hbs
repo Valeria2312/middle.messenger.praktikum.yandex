@@ -1,36 +1,49 @@
 <div class="chat">
     <div class="chat-title">
+        {{#if currentChat}}
         <div class="chat-people">
             <div class="chat-people__img">
-                <!--                <img src="#" alt="Изображение собеседника">-->
+                {{#if currentChat.avatar}}
+                    <img class="chat__header-avatar-img" src="https://ya-praktikum.tech/api/v2/resources{{currentChat.avatar}}" alt="изображение собеседника">
+                {{/if}}
             </div>
-            <h2 class="chat-people__name">Андрей</h2>
+
+            <h2 class="chat-people__name">{{{        currentChat.title}}}</h2>
         </div>
+{{/if}}
         <div class="chat-menu">
+            <div class="chat-menu-points">
+            </div>
             <div class="submenu">
-                <div class="submenu-item_plus">Добавить пользователя
-                </div>
-                <div class="submenu-item_delete">Удалить пользователя
-                </div>
+                {{{addUserInChat}}}
+                {{{deleteChat}}}
+                {{{deleteUser}}}
             </div>
         </div>
+
     </div>
     <div class="chat-main">
-
-
-        <h3 class="chat__day">19 июня</h3>
-
+<!--        <h3 class="chat__day">19 июня</h3>-->
         <div class="chat__content">
-                    {{{messageFrom1}}}
-                    {{{messageFrom2}}}
-                    {{{messageTo1}}}
-                    {{{messageTo2}}}
-                    {{{messageTo3}}}
+            {{#each messages}}
+                {{{this}}}
+            {{/each}}
+
+<!--                    {{{messageFrom1}}}-->
+<!--                    {{{messageFrom2}}}-->
+<!--                    {{{messageTo1}}}-->
+<!--                    {{{messageTo2}}}-->
+<!--                    {{{messageTo3}}}-->
         </div>
     </div>
     <div class="chat-newMessage">
-        <div class="chat-addFile"></div>
+<!--        <div class="chat-addFile"></div>-->
+        {{{inputFile}}}
         {{{inputMessage}}}
-        <button class="chat-pushNewMessage"></button>
+        {{{button}}}
     </div>
+    {{{modaladdUserInChat}}}
+    {{{modalDeleteChat}}}
+    {{{modalDeleteUser}}}
 </div>
+

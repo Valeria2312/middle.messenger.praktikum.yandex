@@ -37,7 +37,14 @@
       background: #EFEFEF;
       cursor: pointer;
       margin-bottom: 21px;
+      &-img {
+            max-width: 100%;
+            height: auto;
+            max-height: 100%;
+        //object-fit: cover;
+      }
     }
+
 
     &-name {
       color: #1E1E1E;

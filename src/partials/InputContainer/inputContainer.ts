@@ -1,12 +1,16 @@
 import Block from "../../utilities/block";
 import template from "./inputContainer.hbs";
 
-interface InputProps {
+export interface InputProps {
     class?: string;
     text?: string;
     name?: string;
     type?: string;
     value?: string;
+    readonly?: boolean,
+    placeholder?: string,
+    classLbl?: string,
+    classInput?: string,
     events?: {
         blur?: (e: FocusEvent) => void
     }

@@ -6,7 +6,8 @@ import { InputContainer } from '../../partials/InputContainer/inputContainer';
 import { handleFormSubmit, validationCheck } from '../../utilities/validation';
 import { Form } from '../../partials/form/form';
 import { Link } from '../../partials/link/link';
-
+import AuthApi from '../../controllers/auth-api';
+import ChatApi from '../../controllers/chat-api';
 
 export class LoginPage extends Block {
     constructor() {
@@ -17,7 +18,13 @@ export class LoginPage extends Block {
         this.children.form = new Form({
             formClass: 'form-login',
             events: {
-                submit: (e) => { handleFormSubmit(e); },
+                submit: (e) => {
+                    const signinData = handleFormSubmit(e);
+                    if (signinData) {
+                        AuthApi.singIn(signinData).then(() => ChatApi.getChats());
+                        // ChatApi.getChats();
+                    }
+                }
             },
             children: [
                 new InputContainer({
@@ -25,7 +32,7 @@ export class LoginPage extends Block {
                     text:'Логин',
                     name: "login",
                     type:'text',
-                    value: 'ivanivanov',
+                    value: 'john_doe',
                     events: {
                         blur: (e: FocusEvent) => { validationCheck(e); }
                     },
@@ -35,7 +42,7 @@ export class LoginPage extends Block {
                     text:'Пароль',
                     type:'text',
                     name:'password',
-                    value: 'ased123',
+                    value: 'Mysecurepassword1',
                     events: {
                         blur: (e: FocusEvent) => { validationCheck(e);}
                     },
@@ -45,7 +52,7 @@ export class LoginPage extends Block {
                 }),
                 new Link({
                     title: 'Нет аккаунта?',
-                    href: '/registration',
+                    href: '/sign-up',
                     classLink: 'form-login__backlink',
                 }),
             ]

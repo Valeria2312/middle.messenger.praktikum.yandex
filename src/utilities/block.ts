@@ -1,7 +1,7 @@
 import { v4 as makeID } from 'uuid';
 import EventBus from './eventBus';
 
-class Block <P extends Record<string, never> = never> {
+class Block {
     static EVENTS = {
         INIT: 'init',
         FLOW_CDM: 'flow:component-did-mount',
@@ -11,7 +11,7 @@ class Block <P extends Record<string, never> = never> {
 
     public id = makeID();
 
-    protected props: P;
+    protected props: any;
 
     public children: Record<string, Block>;
 
@@ -19,11 +19,11 @@ class Block <P extends Record<string, never> = never> {
 
     _element: HTMLElement | null = null;
 
-    private readonly _meta: { tagName: string; props: P; };
+    private readonly _meta: { tagName: string; props: any; };
 
     constructor(tagName = 'div', propsChildren = {}) {
         const eventBus = new EventBus();
-        const { props, children } = this._getChildren(propsChildren as P);
+        const { props, children } = this._getChildren(propsChildren as any);
         this._meta = {
             tagName,
             props,
@@ -37,7 +37,7 @@ class Block <P extends Record<string, never> = never> {
     }
 
     // получение дочерних компонентов
-    _getChildren(childrenAndProps: P): { props: P, children: Record<string, Block>} {
+    _getChildren(childrenAndProps: any): { props: any, children: Record<string, Block>}{
         const props: Record<string, unknown> = {};
         const children: Record<string, Block> = {};
         if (childrenAndProps) {
@@ -49,7 +49,7 @@ class Block <P extends Record<string, never> = never> {
                 }
             });
         }
-        return { props: props as P, children };
+        return { props: props as any, children };
     }
 
     _registerEvents(eventBus: EventBus) {
@@ -106,11 +106,11 @@ class Block <P extends Record<string, never> = never> {
         }
     }
 
-    componentDidUpdate() {
+    componentDidUpdate(): boolean {
         return true;
     }
 
-    setProps = (nextProps: P) => {
+    setProps = (nextProps: any) => {
         if (!nextProps) {
             return;
         }
@@ -206,10 +206,13 @@ class Block <P extends Record<string, never> = never> {
     }
 
     show() {
-        this.getContent()!.style.display = 'block';
+        const elem = this.getContent()?.firstChild;
+          elem!.style.display = "flex";
     }
 
     hide() {
+        //   const elem = this.getContent()?.firstChild;
+        // elem!.style.display = "none";
         this.getContent()!.style.display = 'none';
     }
 }

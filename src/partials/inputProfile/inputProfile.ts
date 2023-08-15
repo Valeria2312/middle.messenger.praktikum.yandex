@@ -8,7 +8,7 @@ interface InputProfileProps {
     value?: string;
     readonly?: boolean,
     events?: {
-        blur?: (e: any) => void
+        blur?: (e: Event) => void
     }
 }
 
