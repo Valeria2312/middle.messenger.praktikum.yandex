@@ -3,7 +3,7 @@ import Block from './block';
 
 class Router {
     private routes!: Route[];
-    private history: History = window.history;
+    history!: History;
     private _currentRoute?: Route | null = null;
     private readonly _rootQuery!: string;
     private static __instance: Router;
@@ -29,7 +29,8 @@ class Router {
 
     start() {
         window.onpopstate = event => {
-            this._onRoute(event.currentTarget.location.pathname);
+            const target = event.currentTarget as Window;
+            if (target) this._onRoute(target.location.pathname);
         };
         this._onRoute(window.location.pathname);
     }

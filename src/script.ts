@@ -36,6 +36,7 @@ const profileData = new ProfileDataChangePage({title: 'pf'});
 const profilePassword = new ProfilePasswordChangePage();
 const chats = new ChatsPage({title: 'pf'});
 
+
 window.addEventListener("DOMContentLoaded", () => {
 
     // const router = new Router("app");
