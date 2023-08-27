@@ -7,7 +7,8 @@
     "build": "vite build",
     "preview": "vite preview",
     "start": "vite build && node server.ts",
-    "test": "mocha -r jsdom-global/register --require ignore-styles"
+    "test": "mocha -r jsdom-global/register --require ignore-styles",
+    "prepare": "husky install"
   },
   "devDependencies": {
     "@types/chai": "^4.3.5",
@@ -18,7 +19,7 @@
     "eslint": "^8.45.0",
     "eslint-config-airbnb": "^19.0.4",
     "express": "^4.18.2",
-    "husky": "^8.0.3",
+    "husky": "^8.0.0",
     "ignore-styles": "^5.0.1",
     "jsdom": "22.1.0",
     "jsdom-global": "3.0.2",
@@ -50,7 +51,8 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm test"
+      "pre-commit": "npm-run-all test lint:all",
+      "pre-push": "npm run other command"
     }
   }
 }
