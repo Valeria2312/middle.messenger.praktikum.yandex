@@ -26,7 +26,6 @@ export class RegistrationPage extends Block {
                         AuthApi.singUp(signupData)
                             .then(res =>console.log(res));
                         router.go("/profile");
-
                     }
                 },
             },

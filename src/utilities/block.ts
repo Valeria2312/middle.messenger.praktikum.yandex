@@ -11,7 +11,7 @@ class Block {
 
     public id = makeID();
 
-    protected props: any;
+    public props: any;
 
     public children: Record<string, Block>;
 
